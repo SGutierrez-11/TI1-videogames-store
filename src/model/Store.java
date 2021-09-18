@@ -15,17 +15,17 @@ public class Store {
 		shelves = createHashTables(shelvesToCreate);
 	}
 	
-	public void createShelves(String [] games, int position) {
+	public void createShelves(String games, int position) {
 		
+		String[] gamesSplited = games.split(" ");
 		
+		for(int i=0; i < gamesSplited.length;i++) {
 		
-		for(int i=0; i < games.length;i++) {
-		
-		String [] parts = games[0].split(" ");
+		//String [] parts = gamesSplited[0].split(" ");
 			
-		Game game = new Game(parts[0],Integer.parseInt(parts[1]),Integer.parseInt(parts[2]));
+		Game game = new Game(gamesSplited[0],Integer.parseInt(gamesSplited[1]),Integer.parseInt(gamesSplited[2]));
 			
-		shelves[position].put(parts[0], game);
+		shelves[position].put(gamesSplited[0], game);
 		
 		}
 	}
