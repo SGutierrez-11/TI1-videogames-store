@@ -23,6 +23,8 @@ public class Main {
 		int shelves = sc.nextInt();
 		sc.nextLine();
 		
+		int count = 0;
+		
 		
 		
 	}

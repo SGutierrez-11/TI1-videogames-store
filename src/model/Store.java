@@ -25,7 +25,7 @@ public class Store {
 			
 		Game game = new Game(parts[0],Integer.parseInt(parts[1]),Integer.parseInt(parts[2]));
 			
-		shelves[position] = 
+		shelves[position].put(parts[0], game);
 		
 		}
 	}
