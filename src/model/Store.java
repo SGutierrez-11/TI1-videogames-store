@@ -2,17 +2,23 @@ package model;
 
 import java.util.Hashtable;
 
+import collections.Queue;
+
 public class Store {
 
 	private int shelvesQuantity;
 	
 	private Hashtable[] shelves;
 	
+	private Queue<Client> clientsQueue;
+	
 	public Store(int shelvesToCreate) {
 	
 		shelvesQuantity = shelvesToCreate;
 		
 		shelves = createHashTables(shelvesToCreate);
+		
+		clientsQueue = new Queue<Client>();
 	}
 	
 	public void createShelves(String games, int position) {
@@ -40,5 +46,8 @@ public class Store {
 			tables[i] = tmp;
 		}
 		return tables;
+	}
+	public void addClienteToQueue(String id,String [] games) {
+		
 	}
 }
