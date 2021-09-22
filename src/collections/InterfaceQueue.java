@@ -1,8 +1,8 @@
-package model;
+package collections;
 
 public interface InterfaceQueue<T> {
 
-	boolean add(T element);
+	void add(T element);
 	
 	boolean offer(T element);
 	

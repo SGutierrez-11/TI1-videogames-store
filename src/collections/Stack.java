@@ -1,4 +1,4 @@
-package model;
+package collections;
 
 public class Stack<T> implements Stackable<T>{
 
