@@ -37,7 +37,7 @@ public class Store {
 		
 		for(int i=0; i < toCreate;i++) {
 			
-			Hashtable tmp = new Hashtable<>();
+			Hashtable tmp = new Hashtable();
 			tables[i] = tmp;
 		}
 		return tables;
@@ -51,6 +51,35 @@ public class Store {
 		int gamesAmount = data.length-1;
 		
 		Game[] games = new Game[gamesAmount];
+		
+		for(int i=0; i < shelves.length;i++) {
+			
+			if((shelves[i].get(data[1])!=null)) {
+				
+				Game tmp = (Game) shelves[i].get(data[1]);
+				System.out.println("Juego encontrado: " + tmp.getCode() + " Y debia ser: " + data[1]);
+				
+				if(tmp.getQuantity()>=1) {
+				
+				boolean out = false;
+				
+				for(int j=0; j < games.length && out==false;j++) {
+					
+					if(games[j]==null) {
+						
+						games[j] = (Game) shelves[i].get(data[1]);
+						out = true;
+					}
+					
+				}
+				
+				}
+			}
+		}
+		Catalog clientCatolog = new Catalog(games);
+		Client clientToAdd = new Client(id);
+		clientToAdd.setGames(clientCatolog);
+		clientsQueue.add(clientToAdd);
 		
 	}
 }
