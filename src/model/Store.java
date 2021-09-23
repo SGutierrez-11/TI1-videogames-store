@@ -21,19 +21,14 @@ public class Store {
 		clientsQueue = new Queue<Client>();
 	}
 	
-	public void createShelves(String games, int position) {
+	public void createShelves(String game, int position) {
 		
-		String[] gamesSplited = games.split(" ");
+		String[] values = game.split(" ");
+		Game gameToAdd = new Game(values[0],Integer.parseInt(values[1]),Integer.parseInt(values[2]));
+		shelves[position].put(values[0], gameToAdd);
+		System.out.println("Codigo: " + gameToAdd.getCode() + " Precio: " + gameToAdd.getPrice()+ " cantidad: " + gameToAdd.getQuantity());
 		
-		for(int i=0; i < gamesSplited.length;i++) {
 		
-		//String [] parts = gamesSplited[0].split(" ");
-			
-		Game game = new Game(gamesSplited[0],Integer.parseInt(gamesSplited[1]),Integer.parseInt(gamesSplited[2]));
-			
-		shelves[position].put(gamesSplited[0], game);
-		
-		}
 	}
 	
 	public Hashtable[] createHashTables(int toCreate) {

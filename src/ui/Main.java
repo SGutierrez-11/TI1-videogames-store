@@ -31,16 +31,16 @@ public class Main {
 		for(int i=0;i < shelves;i++) {
 			
 			String line = sc.nextLine();
-			String[] pos = line.split(" ");
-			int gamesQuantity = Integer.parseInt(pos[1]);
-			String games = "";
-			for(int j=0;j<gamesQuantity;j++) {
+			String [] values = line.split(" ");
+			
+			for(int j=0; j < Integer.parseInt(values[1]);j++) {
 				
-				games+= sc.nextLine() + " ";
+				String gameInfo = sc.nextLine();
+				gameStore.createShelves(gameInfo, i);
+				
+				
 				
 			}
-			gameStore.createShelves(games, i);
-				
 			
 		}
 		int clientsAmount = sc.nextInt();
