@@ -2,7 +2,9 @@ package model;
 
 import java.util.Hashtable;
 
+import collections.LinkedList;
 import collections.Queue;
+import collections.Stack;
 
 public class Store {
 
@@ -12,13 +14,18 @@ public class Store {
 	
 	private Queue<Client> clientsQueue;
 	
-	public Store(int shelvesToCreate) {
+	private LinkedList<Thread> cashier;
+	
+	public Store(int shelvesToCreate, int cashierAmount) {
 	
 		shelvesQuantity = shelvesToCreate;
 		
 		shelves = createHashTables(shelvesToCreate);
 		
 		clientsQueue = new Queue<Client>();
+		
+		
+		
 	}
 	
 	public void createShelves(String game, int position) {
@@ -48,9 +55,7 @@ public class Store {
 		
 		String id = data[0];
 		
-		int gamesAmount = data.length-1;
-		
-		Game[] games = new Game[gamesAmount];
+		Stack<Game> games = new Stack();
 		
 		for(int i=0; i < shelves.length;i++) {
 			
@@ -61,18 +66,8 @@ public class Store {
 				
 				if(tmp.getQuantity()>=1) {
 				
-				boolean out = false;
-				
-				for(int j=0; j < games.length && out==false;j++) {
-					
-					if(games[j]==null) {
-						
-						games[j] = (Game) shelves[i].get(data[1]);
-						out = true;
-					}
-					
-				}
-				
+					games.push(tmp);
+					System.out.println(games.peek().getCode() + " Entro correctamente");
 				}
 			}
 		}
@@ -80,6 +75,11 @@ public class Store {
 		Client clientToAdd = new Client(id);
 		clientToAdd.setGames(clientCatolog);
 		clientsQueue.add(clientToAdd);
+		
+	}
+	public void createCashiers(int amount) {
+		
+		
 		
 	}
 }

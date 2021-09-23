@@ -26,7 +26,7 @@ public class Main {
 		sc.nextLine();
 		
 		
-		Store gameStore = new Store(shelves);
+		Store gameStore = new Store(shelves,cashier);
 		
 		for(int i=0;i < shelves;i++) {
 			

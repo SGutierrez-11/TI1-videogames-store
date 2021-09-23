@@ -1,19 +1,22 @@
 package model;
 
+import collections.LinkedList;
+import collections.Stack;
+
 public class Catalog {
 
-	private Game games[];
+	private Stack<Game> games;
 	
-	public Catalog(Game[] games) {
+	public Catalog(Stack<Game> games) {
 		this.games = games;
 	}
 	
 	
-	public Game[] getGames() {
+	public Stack<Game> getGames() {
 		return games;
 	}
 
-	public void setGames(Game[] games) {
+	public void setGames(Stack<Game> games) {
 		this.games = games;
 	}
 	
