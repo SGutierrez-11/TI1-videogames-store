@@ -42,7 +42,15 @@ public class Store {
 		}
 		return tables;
 	}
-	public void addClienteToQueue(String id,String [] games) {
+	public void addClienteToQueue(String info) {
+		
+		String[]data = info.split(" ");
+		
+		String id = data[0];
+		
+		int gamesAmount = data.length-1;
+		
+		Game[] games = new Game[gamesAmount];
 		
 	}
 }

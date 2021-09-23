@@ -45,6 +45,12 @@ public class Main {
 		}
 		int clientsAmount = sc.nextInt();
 		sc.nextLine();
+		for(int i=0; i < clientsAmount;i++) {
+			
+			String clientData = sc.nextLine();
+			gameStore.addClienteToQueue(clientData);
+			
+		}
 		
 	}
 	
