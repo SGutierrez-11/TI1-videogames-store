@@ -5,6 +5,7 @@ import java.util.Hashtable;
 import collections.LinkedList;
 import collections.Queue;
 import collections.Stack;
+import thread.GameStoreThread;
 
 public class Store {
 
@@ -14,7 +15,7 @@ public class Store {
 	
 	private Queue<Client> clientsQueue;
 	
-	private LinkedList<Thread> cashier;
+	private LinkedList<GameStoreThread> cashier;
 	
 	public Store(int shelvesToCreate, int cashierAmount) {
 	
@@ -24,7 +25,9 @@ public class Store {
 		
 		clientsQueue = new Queue<Client>();
 		
-		
+		GameStoreThread firstThread = new GameStoreThread(this, 20);
+		cashier = new LinkedList<GameStoreThread>(firstThread);
+		createCashiers(shelvesToCreate,1, cashier);
 		
 	}
 	
@@ -77,9 +80,19 @@ public class Store {
 		clientsQueue.add(clientToAdd);
 		
 	}
-	public void createCashiers(int amount) {
+	public void createCashiers(int amountToCreate, int amountCreated,LinkedList<GameStoreThread> c) {
 		
+		if(amountToCreate > amountCreated) {
 		
-		
+			GameStoreThread tmpThread = new GameStoreThread(this,10);
+			LinkedList<GameStoreThread> tmpGameLinkedList = new LinkedList<GameStoreThread>(tmpThread);
+			c.setNext(tmpGameLinkedList);
+			createCashiers(amountToCreate, amountCreated+1, tmpGameLinkedList);
+			
+			
+		}else {
+			return;
+			
+		}
 	}
 }
