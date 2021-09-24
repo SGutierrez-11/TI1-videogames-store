@@ -67,8 +67,7 @@ public class Store {
 				Game tmp = (Game) shelves[i].get(data[1]);
 				System.out.println("Juego encontrado: " + tmp.getCode() + " Y debia ser: " + data[1]);
 				
-				if(tmp.getQuantity()>=1) {
-				
+				if(tmp.getQuantity()>=1) { //Ordenar juegos
 					games.push(tmp);
 					System.out.println(games.peek().getCode() + " Entro correctamente");
 				}
