@@ -1,7 +1,7 @@
 package model;
 
-import java.util.Hashtable;
 
+import collections.HashTable;
 import collections.LinkedList;
 import collections.Queue;
 import collections.Stack;
@@ -11,7 +11,7 @@ public class Store {
 
 	private int shelvesQuantity;
 	
-	private Hashtable[] shelves;
+	private HashTable<Game>[] shelves;
 	
 	private Queue<Client> clientsQueue;
 	
@@ -21,7 +21,9 @@ public class Store {
 	
 		shelvesQuantity = shelvesToCreate;
 		
-		shelves = createHashTables(shelvesToCreate);
+		shelves = new HashTable[shelvesToCreate];
+		
+		createHashTables(shelvesToCreate);
 		
 		clientsQueue = new Queue<Client>();
 		
@@ -35,22 +37,23 @@ public class Store {
 		
 		String[] values = game.split(" ");
 		Game gameToAdd = new Game(values[0],Integer.parseInt(values[1]),Integer.parseInt(values[2]));
-		shelves[position].put(values[0], gameToAdd);
+		shelves[position].insert(values[0], gameToAdd);
 		System.out.println("Codigo: " + gameToAdd.getCode() + " Precio: " + gameToAdd.getPrice()+ " cantidad: " + gameToAdd.getQuantity());
 		
 		
 	}
 	
-	public Hashtable[] createHashTables(int toCreate) {
+	public HashTable<Game>[] createHashTables(int toCreate) {
 		
-		Hashtable[] tables = new Hashtable[toCreate];
+		HashTable<Game>[] tables = new HashTable [toCreate];
 		
 		for(int i=0; i < toCreate;i++) {
 			
-			Hashtable tmp = new Hashtable();
+			HashTable<Game> tmp = new HashTable<Game>();
 			tables[i] = tmp;
 		}
 		return tables;
+		
 	}
 	public void addClienteToQueue(String info) {
 		
