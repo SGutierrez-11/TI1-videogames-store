@@ -18,6 +18,7 @@ public class Queue<T> implements InterfaceQueue<T>{
 	@Override
 	public void add(T element) {
 		
+		
 		LinkedList<T> newValue = new LinkedList<T>(element);
 		
 		if(isEmpty()==true) {
@@ -44,22 +45,10 @@ public class Queue<T> implements InterfaceQueue<T>{
 		
 	}
 
-	@Override
-	public T poll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public T element() {
-		
-		return value.getObject();
-	}
 
 	@Override
 	public T peek() {
-		// TODO Auto-generated method stub
-		return null;
+		return value.getObject();
 	}
 
 
@@ -72,6 +61,7 @@ public class Queue<T> implements InterfaceQueue<T>{
 		}
 		
 	}
+
 
 	
 

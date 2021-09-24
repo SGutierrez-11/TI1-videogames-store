@@ -6,10 +6,6 @@ public interface InterfaceQueue<T> {
 	
 	T remove();
 	
-	T poll();
-	
-	public T element();
-	
 	public T peek();
 	
 	boolean isEmpty();

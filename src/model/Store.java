@@ -95,4 +95,17 @@ public class Store {
 			
 		}
 	}
+	public void payClient() {
+		
+		if(clientsQueue.isEmpty()==false) {
+			
+			Client tmp = clientsQueue.remove();
+			
+			int amountToPlay = 0;
+			
+			
+		}
+		
+		
+	}
 }
