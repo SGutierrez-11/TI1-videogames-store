@@ -97,23 +97,31 @@ public class Store {
 			
 		}
 	}
-	public void payClient() {
+	public String payClient() {
 		
 		Stack<Game> stackToPay = new Stack<Game>();
-		
-		if(clientsQueue.isEmpty()==false) {
 			
 			Client tmp = clientsQueue.remove();
 			
+			String line = "";
+			
+			String line2 = "";
+			
 			int amountToPlay = 0;
 			
-			for()
+			for(int i=0; i < tmp.getGames().getGames().size();i++) {
 			
 			Game tmpGame = tmp.getGames().getGames().peek();
 			
-			amountToPlay +=
+			 amountToPlay += tmpGame.getPrice();
+			 
+			 stackToPay.push(tmpGame);
+			 line2 += tmpGame.getCode() + " ";
+			}
+			line = ""+amountToPlay;
+			String line3 = line + "\t" + line2;
+			return line3;
 			
-		}
 		
 		
 	}
