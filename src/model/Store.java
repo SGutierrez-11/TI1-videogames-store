@@ -84,11 +84,19 @@ public class Store {
 		return tables;
 		
 	}
-	public Catolog turnGamesArrayListInCatalog() {
+	public Catalog turnGamesArrayListInCatalog() {
 		
 		Stack<Game> tmpStack = new Stack();
 		
+		ArrayList<Game> tmp = getGames(); 
 		
+		for(int i=0; i < tmp.size();i++) {
+			
+			tmpStack.push(tmp.get(i));
+			
+		}
+		Catalog clientCatolog = new Catalog(tmpStack);
+		return clientCatolog;
 	}
 	
 	
@@ -101,15 +109,19 @@ public class Store {
 		//cuarto convertir el stack games en catologo y setearlo al cliente
 		//quinto añadir cliente al queue
 		
-		Catalog clientCatolog = new Catalog(games);
-		Client clientToAdd = new Client(id);
+		Catalog clientCatolog = turnGamesArrayListInCatalog();
+		Client clientToAdd = new Client(code);
+		clientToAdd.setGames(clientCatolog);
 		
+		//*********************
 		
 		Stack<Game> games = new Stack<Game>();
 		
 		
+		//*************************
+		Catalog tmp = new Catalog(games);
 		
-		clientToAdd.setGames(clientCatolog);
+		clientToAdd.setGames(tmp);
 		clientsQueue.add(clientToAdd);
 		
 	}
@@ -171,6 +183,9 @@ public class Store {
 		this.clientsCounted = clientsCounted;
 	}
 	
+	public ArrayList<Game> getGames(){
+		return games;
+	}
 	
 	
 	
