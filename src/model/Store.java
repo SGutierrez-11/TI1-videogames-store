@@ -99,12 +99,19 @@ public class Store {
 	}
 	public void payClient() {
 		
+		Stack<Game> stackToPay = new Stack<Game>();
+		
 		if(clientsQueue.isEmpty()==false) {
 			
 			Client tmp = clientsQueue.remove();
 			
 			int amountToPlay = 0;
 			
+			for()
+			
+			Game tmpGame = tmp.getGames().getGames().peek();
+			
+			amountToPlay +=
 			
 		}
 		

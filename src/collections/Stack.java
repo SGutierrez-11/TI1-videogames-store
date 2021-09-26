@@ -52,8 +52,15 @@ public class Stack<T> implements Stackable<T>{
 	}
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		if(this.previus==null) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	@Override
+	public int size() {
+		return this.isEmpty() ? 0:1 + this.previus.size();
 	}
 	
 }
