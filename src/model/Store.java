@@ -11,13 +11,19 @@ public class Store {
 
 	private int shelvesQuantity;
 	
+	private int clientsAmount;
+	
 	private HashTable<Game>[] shelves;
 	
 	private Queue<Client> clientsQueue;
 	
 	private LinkedList<GameStoreThread> cashier;
 	
-	public Store(int shelvesToCreate, int cashierAmount) {
+	public Store() {
+		
+	}
+	
+	public Store(int shelvesToCreate, int cashierAmount, int clientsAmount) {
 	
 		shelvesQuantity = shelvesToCreate;
 		
@@ -30,6 +36,8 @@ public class Store {
 		GameStoreThread firstThread = new GameStoreThread(this, 20);
 		cashier = new LinkedList<GameStoreThread>(firstThread);
 		createCashiers(shelvesToCreate,1, cashier);
+		
+		this.clientsAmount =  clientsAmount;
 		
 	}
 	
@@ -49,8 +57,8 @@ public class Store {
 		
 		for(int i=0; i < toCreate;i++) {
 			
-			HashTable<Game> tmp = new HashTable<Game>();
-			tables[i] = tmp;
+			//HashTable<Game> tmp = new HashTable<Game>();
+			//tables[i] = tmp;
 		}
 		return tables;
 		
@@ -61,7 +69,7 @@ public class Store {
 		
 		String id = data[0];
 		
-		Stack<Game> games = new Stack();
+		Stack<Game> games = new Stack<Game>();
 		
 		for(int i=0; i < shelves.length;i++) {
 			

@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="mainPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <GridPane style="-fx-background-color: Gray;" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -31,9 +31,9 @@
                   <Font name="Times New Roman" size="17.0" />
                </font>
             </Label>
-            <TextField translateX="-10.0" GridPane.columnIndex="2" />
-            <TextField minWidth="-Infinity" prefHeight="26.0" prefWidth="202.0" translateX="-10.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <TextField translateX="-10.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <TextField fx:id="shelvesAmount" translateX="-10.0" GridPane.columnIndex="2" />
+            <TextField fx:id="clientsQuantity" minWidth="-Infinity" prefHeight="26.0" prefWidth="202.0" translateX="-10.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <TextField fx:id="cashiersQuantity" translateX="-10.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
             <Label layoutX="10.0" layoutY="63.0" text="Clients Quantity:" textFill="#ae20c7" translateX="50.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font name="Times New Roman" size="17.0" />
@@ -73,7 +73,7 @@
         </rowConstraints>
          <children>
             <Button mnemonicParsing="false" text="Reset" translateX="230.0" />
-            <Button mnemonicParsing="false" text="Next" translateX="30.0" GridPane.columnIndex="1" />
+            <Button mnemonicParsing="false" onAction="#loadAddGame" text="Next" translateX="30.0" GridPane.columnIndex="1" />
          </children>
       </GridPane>
    </bottom>
