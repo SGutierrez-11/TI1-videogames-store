@@ -119,12 +119,16 @@ public class Store {
 			//Falta agregar al stack en el orden necesario
 		}
 		
+		
+		
 		//*************************
 		Catalog tmp = new Catalog(ordered);
 		
 		clientToAdd.setGames(tmp);
 		clientsQueue.add(clientToAdd);
 		
+		ArrayList<Game> newGames = new ArrayList<Game>();
+		setGames(newGames);
 	}
 	public void createCashiers(int amountToCreate, int amountCreated,LinkedList<GameStoreThread> c) {
 		
@@ -186,6 +190,9 @@ public class Store {
 	
 	public ArrayList<Game> getGames(){
 		return games;
+	}
+	public void setGames(ArrayList<Game> games) {
+		this.games = games;
 	}
 	
 	
