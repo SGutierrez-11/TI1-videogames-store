@@ -84,29 +84,31 @@ public class Store {
 		return tables;
 		
 	}
-	public void addClienteToQueue(String info) {
+	public Catolog turnGamesArrayListInCatalog() {
 		
-		String[]data = info.split(" ");
+		Stack<Game> tmpStack = new Stack();
 		
-		String id = data[0];
+		
+	}
+	
+	
+	public void addClienteToQueue(String code) {
+		
+		
+		//Primero crear metodo que convierta de arraylist a stack y este en catalogo catologo
+		//luego ordernar catologo
+		//tercero guardar catologo en el stack games
+		//cuarto convertir el stack games en catologo y setearlo al cliente
+		//quinto añadir cliente al queue
+		
+		Catalog clientCatolog = new Catalog(games);
+		Client clientToAdd = new Client(id);
+		
 		
 		Stack<Game> games = new Stack<Game>();
 		
-		for(int i=0; i < shelves.length;i++) {
-			
-			if((shelves[i].get(data[1])!=null)) {
-				
-				Game tmp = (Game) shelves[i].get(data[1]);
-				System.out.println("Juego encontrado: " + tmp.getCode() + " Y debia ser: " + data[1]);
-				
-				if(tmp.getQuantity()>=1) { //Ordenar juegos
-					games.push(tmp);
-					System.out.println(games.peek().getCode() + " Entro correctamente");
-				}
-			}
-		}
-		Catalog clientCatolog = new Catalog(games);
-		Client clientToAdd = new Client(id);
+		
+		
 		clientToAdd.setGames(clientCatolog);
 		clientsQueue.add(clientToAdd);
 		

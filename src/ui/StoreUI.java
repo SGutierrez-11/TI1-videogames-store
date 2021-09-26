@@ -91,6 +91,12 @@ public class StoreUI {
 		 
 		 int price = Integer.parseInt(gamePriceTxT.getText());
 		 
+		 	if(gameCodeTxT.getText()!="" || gameQuantityTxT.getText()!=""||gamePriceTxT.getText()!=""         ) {
+		 	
+		 		gameStore.createShelves(code, price, quantity);
+		 		
+		 		
+		 		}
 	    }
 
 }
