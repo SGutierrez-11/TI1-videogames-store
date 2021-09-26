@@ -111,11 +111,12 @@ public class Store {
 		
 		Catalog clientCatolog = turnGamesArrayListInCatalog();
 		Client clientToAdd = new Client(code);
-		clientToAdd.setGames(clientCatolog);
 		
 		//*********************
 		
 		Stack<Game> games = new Stack<Game>();
+		
+		
 		
 		
 		//*************************
@@ -124,6 +125,8 @@ public class Store {
 		clientToAdd.setGames(tmp);
 		clientsQueue.add(clientToAdd);
 		
+		ArrayList<Game> newGames = new ArrayList<Game>();
+		setGames(newGames);
 	}
 	public void createCashiers(int amountToCreate, int amountCreated,LinkedList<GameStoreThread> c) {
 		
@@ -185,6 +188,9 @@ public class Store {
 	
 	public ArrayList<Game> getGames(){
 		return games;
+	}
+	public void setGames(ArrayList<Game> games) {
+		this.games = games;
 	}
 	
 	
