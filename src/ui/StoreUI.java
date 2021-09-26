@@ -79,11 +79,18 @@ public class StoreUI {
 		 mainPane.getChildren().setAll(addGamePane);
 		 int indicator = gameStore.getCurrentShelves()+1;
 		 numberIndicator.setText(""+indicator);
+		 gameStore.setClientsCounted(indicator);
 		 
 	    }
 	 @FXML
 	  public  void addGameToShelf(ActionEvent event) {
-
+		 	
+		 String code = gameCodeTxT.getText();
+		 
+		 int quantity = Integer.parseInt(gameQuantityTxT.getText());
+		 
+		 int price = Integer.parseInt(gamePriceTxT.getText());
+		 
 	    }
 
 }
