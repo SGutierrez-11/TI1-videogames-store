@@ -6,12 +6,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import model.Store;
 
 public class StoreUI {
 
+	//*********** FirstPane ***********
 	
 	@FXML
     private TextField shelvesAmount;
@@ -27,6 +29,22 @@ public class StoreUI {
     
 	private Store gameStore;
 	
+	//************** GameCreationPane **********
+	
+	@FXML
+    private BorderPane mainPaneGameCreation;
+
+    @FXML
+    private Label numberIndicator;
+
+    @FXML
+    private TextField gameCodeTxT;
+
+    @FXML
+    private TextField gamePriceTxT;
+
+    @FXML
+    private TextField gameQuantityTxT;
 	
 	public StoreUI() {
 		
@@ -51,13 +69,21 @@ public class StoreUI {
 		 
 		 int shelves = Integer.parseInt(shelvesAmount.getText());
 		 
+		 Store gameStoreNew = new Store(shelves, cashiers, clients);
 		 
-		 setStore(new Store(shelves, cashiers, clients));
+		 setStore(gameStoreNew);
 		 
 		 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("addGame.fxml"));
 		 fxmlLoader.setController(this);
 		 Parent addGamePane = fxmlLoader.load();
 		 mainPane.getChildren().setAll(addGamePane);
+		 int indicator = gameStore.getCurrentShelves()+1;
+		 numberIndicator.setText(""+indicator);
+		 
+	    }
+	 @FXML
+	  public  void addGameToShelf(ActionEvent event) {
+
 	    }
 
 }

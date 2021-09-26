@@ -1,6 +1,8 @@
 package model;
 
 
+import java.util.ArrayList;
+
 import collections.HashTable;
 import collections.LinkedList;
 import collections.Queue;
@@ -17,7 +19,15 @@ public class Store {
 	
 	private Queue<Client> clientsQueue;
 	
+	private LinkedList<ArrayList<Game>> gamesLinked;
+	
+	private ArrayList<Game> games;
+	
 	private LinkedList<GameStoreThread> cashier;
+	
+	int shelvesCounted;
+	
+	int clientsCounted;
 	
 	public Store() {
 		
@@ -39,6 +49,8 @@ public class Store {
 		
 		this.clientsAmount =  clientsAmount;
 		
+		shelvesCounted = 0;
+		clientsCounted = 0;
 	}
 	
 	public void createShelves(String game, int position) {
@@ -133,4 +145,23 @@ public class Store {
 		
 		
 	}
+	public int getCurrentShelves() {
+		return shelvesCounted;
+	}
+	public void setCurrentShelves(int shelvesCounted) {
+		this.shelvesCounted = shelvesCounted;
+	}
+
+	public int getClientsCounted() {
+		return clientsCounted;
+	}
+
+	public void setClientsCounted(int clientsCounted) {
+		this.clientsCounted = clientsCounted;
+	}
+	
+	
+	
+	
+	
 }

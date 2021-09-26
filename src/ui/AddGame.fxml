@@ -14,8 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: Gray;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="mainPaneGameCreation" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: Gray;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -35,7 +34,7 @@
                   <Font name="Times New Roman" size="20.0" />
                </font>
             </Label>
-            <Label textFill="#ae20c7" GridPane.columnIndex="2">
+            <Label fx:id="numberIndicator" textFill="#ae20c7" GridPane.columnIndex="2">
                <font>
                   <Font name="Times New Roman" size="20.0" />
                </font>
@@ -60,9 +59,9 @@
                   <Font name="Times New Roman" size="20.0" />
                </font>
             </Label>
-            <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="139.0" translateX="-270.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="139.0" translateX="-270.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <TextField maxWidth="-Infinity" prefHeight="26.0" prefWidth="139.0" translateX="-270.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <TextField fx:id="gameCodeTxT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="139.0" translateX="-270.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <TextField fx:id="gamePriceTxT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="139.0" translateX="-270.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <TextField fx:id="gameQuantityTxT" maxWidth="-Infinity" prefHeight="26.0" prefWidth="139.0" translateX="-270.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
             <ImageView fitHeight="100.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                <image>
                   <Image url="@../../../TI1-videogames-store/src/ui/Dados.png" />
@@ -87,7 +86,7 @@
                         <TableColumn prefWidth="103.0" text="Quantity" />
                     </columns>
                   </TableView>
-                  <Button mnemonicParsing="false" text="Add" translateX="25.0" translateY="238.0" />
+                  <Button mnemonicParsing="false" onAction="#addGameToShelf" text="Add" translateX="25.0" translateY="238.0" />
                </children>
             </Pane>
          </children>
