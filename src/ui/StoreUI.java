@@ -45,11 +45,11 @@ public class StoreUI {
 	 @FXML
 	 public void loadAddGame(ActionEvent event) throws IOException {
 
-		 int cashiers = Integer.parseInt(cashiersQuantity.getAccessibleText());
+		 int cashiers = Integer.parseInt(cashiersQuantity.getText());
 		 
-		 int clients = Integer.parseInt(clientsQuantity.getAccessibleText());
+		 int clients = Integer.parseInt(clientsQuantity.getText());
 		 
-		 int shelves = Integer.parseInt(shelvesAmount.getAccessibleText());
+		 int shelves = Integer.parseInt(shelvesAmount.getText());
 		 
 		 
 		 setStore(new Store(shelves, cashiers, clients));
