@@ -52,7 +52,7 @@ public class Store {
 		}
 		return tables;
 	}
-	public void addClienteToQueue(String info) {
+	public void addClienteToQueue(String info) {	
 		
 		String[]data = info.split(" ");
 		
