@@ -19,7 +19,7 @@ public class Store {
 	
 	private Queue<Client> clientsQueue;
 	
-	private ArrayList<Game>[] gamesLinked;
+	//private ArrayList<Game>[] gamesLinked;
 	
 	private ArrayList<Game> games;
 	
@@ -39,7 +39,7 @@ public class Store {
 		
 		shelves = new HashTable[shelvesToCreate];
 		
-		createHashTables(shelvesToCreate);
+		//createHashTables(shelvesToCreate);
 		
 		clientsQueue = new Queue<Client>();
 		
@@ -52,26 +52,52 @@ public class Store {
 		shelvesCounted = 0;
 		clientsCounted = 0;
 		
-		gamesLinked = new ArrayList[shelvesToCreate];
+		games = new ArrayList<Game>();
+		
+		//gamesLinked = new ArrayList[shelvesToCreate];
 	}
 	public void addGameToList(String code, int price, int quantity) {
 		
 		Game tmpGame = new Game(code, price, quantity);
-		
+		/*
+		if(gamesLinked[shelvesCounted]==null) {
+			System.out.println("Aqui tambien hay problemas");
+		}	
 		gamesLinked[shelvesCounted].add(tmpGame);
-		
+		*/
+		games.add(tmpGame);
 		
 	}
 	
+	/*
 	public void createShelves(String game,int price, int quantity) {
 		
 		Game gameToAdd = new Game(game,price,quantity);
-		shelves[getCurrentShelves()].insert(game, gameToAdd);
+		if(shelves[getCurrentShelves()-1]==null) {
+			System.out.println("La Hashtable se esta creando mal");
+		}
+		
+		shelves[(getCurrentShelves()-1)].insert(game, gameToAdd);
 		System.out.println("Codigo: " + gameToAdd.getCode() + " Precio: " + gameToAdd.getPrice()+ " cantidad: " + gameToAdd.getQuantity());
 		
 		
 	}
+	*/
+	public void createHashTable() {
 	
+		ArrayList<Game> newTmp = getGames();
+		
+		HashTable<Game> tmp = new HashTable<>(newTmp.size());
+		
+		for(int i=0; i < newTmp.size();i++) {
+			
+			tmp.insert(newTmp.get(i).getCode(), newTmp.get(i));
+			
+		}
+		shelves[getCurrentShelves()]=tmp;
+		
+	}
+	/*
 	public HashTable<Game>[] createHashTables(int toCreate) {
 		
 		HashTable<Game>[] tables = new HashTable [toCreate];
@@ -84,6 +110,7 @@ public class Store {
 		return tables;
 		
 	}
+	*/
 	public Catalog turnGamesArrayListInCatalog() {
 		
 		Stack<Game> tmpStack = new Stack();
