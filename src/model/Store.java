@@ -110,7 +110,8 @@ public class Store {
 			
 		}
 		shelves[getCurrentShelves()]=tmp;
-		
+		ArrayList<Game> newGames = new ArrayList<Game>();
+		setGames(newGames);
 	}
 	/*
 	public HashTable<Game>[] createHashTables(int toCreate) {
@@ -169,8 +170,7 @@ public class Store {
 		clientToAdd.setGames(tmp);
 		clientsQueue.add(clientToAdd);
 		
-		ArrayList<Game> newGames = new ArrayList<Game>();
-		setGames(newGames);
+		
 	}
 	public void createCashiers(int amountToCreate, int amountCreated,LinkedList<GameStoreThread> c) {
 		

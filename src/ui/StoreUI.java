@@ -1,6 +1,7 @@
 package ui;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -131,14 +132,29 @@ public class StoreUI {
 	    	quantityColumn.setCellValueFactory(new PropertyValueFactory<Game,Integer>("quantity"));
 	 }
 	  @FXML
-	   public void nextStep(ActionEvent event) {
+	   public void nextStep(ActionEvent event) throws IOException {
 
-		  	if(gameStore.getCurrentShelves()<gameStore.getShelvesQuantity()) {
-		  
 		  		gameStore.createHashTable();
-		  	
+
+		  		if(gameStore.getCurrentShelves()<gameStore.getShelvesQuantity()) {
 		  		
-		  	}
+		  			gameStore.setCurrentShelves(gameStore.getCurrentShelves()+1);
+		  			gameCodeTxT.setText("");
+		  			gamePriceTxT.setText("");
+		  			gameQuantityTxT.setText("");
+		  			
+		  			numberIndicator.setText(""+gameStore.getCurrentShelves());
+		  			
+		  			AddGameTableView.refresh();
+		  		
+		  		}else {
+		  			
+		  			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("addClient.fxml"));
+		  			fxmlLoader.setController(this);
+		  	    	Parent menuPane = fxmlLoader.load();
+		  	    	mainPane.getChildren().setAll(menuPane);
+		  			
+		  		}	
 	    }
 
 
