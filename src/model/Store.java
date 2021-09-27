@@ -13,6 +13,21 @@ public class Store {
 
 	private int shelvesQuantity;
 	
+	public int getShelvesQuantity() {
+		return shelvesQuantity;
+	}
+
+	public void setShelvesQuantity(int shelvesQuantity) {
+		this.shelvesQuantity = shelvesQuantity;
+	}
+
+	public int getClientsAmount() {
+		return clientsAmount;
+	}
+
+	public void setClientsAmount(int clientsAmount) {
+		this.clientsAmount = clientsAmount;
+	}
 	private int clientsAmount;
 	
 	private HashTable<Game>[] shelves;

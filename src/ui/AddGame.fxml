@@ -101,7 +101,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" text="Next" translateX="360.0" />
+            <Button mnemonicParsing="false" onAction="#nextStep" text="Next" translateX="360.0" />
          </children>
       </GridPane>
    </bottom>

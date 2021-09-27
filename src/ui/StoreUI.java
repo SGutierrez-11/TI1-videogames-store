@@ -130,5 +130,16 @@ public class StoreUI {
 	    	priceColumn.setCellValueFactory(new PropertyValueFactory<Game,Integer>("price"));
 	    	quantityColumn.setCellValueFactory(new PropertyValueFactory<Game,Integer>("quantity"));
 	 }
+	  @FXML
+	   public void nextStep(ActionEvent event) {
+
+		  	if(gameStore.getCurrentShelves()<gameStore.getShelvesQuantity()) {
+		  
+		  		gameStore.createHashTable();
+		  	
+		  		
+		  	}
+	    }
+
 
 }
