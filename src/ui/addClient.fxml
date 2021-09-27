@@ -50,7 +50,7 @@
                   <Font name="Times New Roman" size="20.0" />
                </font>
             </Label>
-            <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="139.0" translateX="-270.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <TextField fx:id="clientIDTxT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="139.0" translateX="-270.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
             <ImageView fitHeight="100.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                <image>
                   <Image url="@id-logo-icon-png-svg.png" />
@@ -63,15 +63,15 @@
             </ImageView>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <children>
-                  <TableView layoutX="-76.0" layoutY="-32.0" prefHeight="253.0" prefWidth="274.0" translateY="10.0">
+                  <TableView fx:id="ClientGamesTableView" layoutX="-76.0" layoutY="-32.0" prefHeight="253.0" prefWidth="274.0" translateY="10.0">
                     <columns>
-                      <TableColumn prefWidth="273.0" text="Games" />
+                      <TableColumn fx:id="clientGamesColumn" prefWidth="273.0" text="Games" />
                     </columns>
                   </TableView>
-                  <Button mnemonicParsing="false" text="Add" translateX="25.0" translateY="238.0" />
+                  <Button mnemonicParsing="false" onAction="#addGameToClient" text="Add" translateX="25.0" translateY="238.0" />
                </children>
             </Pane>
-            <ComboBox prefWidth="150.0" translateX="-75.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <ComboBox fx:id="clientGamesComboBox" prefWidth="150.0" translateX="-75.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </center>
@@ -84,7 +84,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" text="Next" translateX="360.0" />
+            <Button mnemonicParsing="false" onAction="#thirdStep" text="Next" translateX="360.0" />
          </children>
       </GridPane>
    </bottom>

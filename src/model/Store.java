@@ -38,6 +38,8 @@ public class Store {
 	
 	private ArrayList<Game> games;
 	
+	private ArrayList<Game> allGames;
+	
 	private LinkedList<GameStoreThread> cashier;
 	
 	int shelvesCounted;
@@ -69,6 +71,8 @@ public class Store {
 		
 		games = new ArrayList<Game>();
 		
+		allGames = new ArrayList<Game>();
+		
 		//gamesLinked = new ArrayList[shelvesToCreate];
 	}
 	public void addGameToList(String code, int price, int quantity) {
@@ -81,7 +85,20 @@ public class Store {
 		gamesLinked[shelvesCounted].add(tmpGame);
 		*/
 		games.add(tmpGame);
+		allGames.add(tmpGame);
+	}
+	public void addGame(String code) {
 		
+		for(int i=0; i < shelves.length;i++) {
+		
+			if(shelves[i].contains(code)==true) {
+			
+				games.add(shelves[i].get(code));
+				
+			}else {
+				
+			}
+		}
 	}
 	
 	/*
@@ -109,9 +126,8 @@ public class Store {
 			tmp.insert(newTmp.get(i).getCode(), newTmp.get(i));
 			
 		}
-		shelves[getCurrentShelves()]=tmp;
-		ArrayList<Game> newGames = new ArrayList<Game>();
-		setGames(newGames);
+		shelves[getCurrentShelves()-1]=tmp;
+		setGamesEmpty();
 	}
 	/*
 	public HashTable<Game>[] createHashTables(int toCreate) {
@@ -169,7 +185,7 @@ public class Store {
 		
 		clientToAdd.setGames(tmp);
 		clientsQueue.add(clientToAdd);
-		
+		setGamesEmpty();
 		
 	}
 	public void createCashiers(int amountToCreate, int amountCreated,LinkedList<GameStoreThread> c) {
@@ -234,10 +250,17 @@ public class Store {
 		return games;
 	}
 	public void setGames(ArrayList<Game> games) {
+		
 		this.games = games;
 	}
-	
-	
-	
+	public void setGamesEmpty() {
+		
+		ArrayList<Game> newGames = new ArrayList<Game>();
+		setGames(newGames);
+		
+	}
+	public ArrayList<Game> getAllGames(){
+		return allGames;
+	}
 	
 }

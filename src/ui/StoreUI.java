@@ -1,7 +1,6 @@
 package ui;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -64,11 +64,25 @@ public class StoreUI {
 
     @FXML
     private TableColumn<Game, Integer> quantityColumn;
+    
+    //**************** AddClient ********************
 	
-	public StoreUI() {
+    @FXML
+    private TextField clientIDTxT;
+
+    @FXML
+    private TableView<Game> ClientGamesTableView;
+
+    @FXML
+    private TableColumn<Game, String> clientGamesColumn;
+
+    @FXML
+    private ComboBox<String> clientGamesComboBox;
+
+    
+	//public StoreUI() {
 		
-		
-	}
+	//}
 	public StoreUI(Store gameStore){
 		
 		this.gameStore = gameStore;	
@@ -153,9 +167,63 @@ public class StoreUI {
 		  			fxmlLoader.setController(this);
 		  	    	Parent menuPane = fxmlLoader.load();
 		  	    	mainPane.getChildren().setAll(menuPane);
-		  			
+		  			gameStore.setGamesEmpty();
+		  			initializeClientsTableview();
+		  			initializeGamesCombobox();
+		  			gameStore.setClientsCounted(gameStore.getClientsAmount()+1);
 		  		}	
 	    }
+	  @FXML
+	   public void addGameToClient(ActionEvent event) {
 
+		String game = clientGamesComboBox.getAccessibleText();
+		  
+			gameStore.addGame(game);
+			initializeClientsTableview();
+			ClientGamesTableView.refresh();
+		
+		  	
+	    }
+	  @FXML
+	  public void thirdStep(ActionEvent event) throws IOException {
 
+		  String clientCode = clientIDTxT.getText();
+		  gameStore.addClienteToQueue(clientCode);
+		  
+		  if(gameStore.getClientsCounted()<gameStore.getClientsAmount()) {
+			  
+			  clientIDTxT.setText("");
+			  clientGamesComboBox.setAccessibleText("");
+			  ClientGamesTableView.refresh();
+			  gameStore.setClientsAmount(gameStore.getClientsAmount()+1);
+			  
+		  }else {
+			 
+			  FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("gameOrderPane.fxml"));
+	  			fxmlLoader.setController(this);
+	  	    	Parent menuPane = fxmlLoader.load();
+	  	    	mainPane.getChildren().setAll(menuPane);
+	  			gameStore.setGamesEmpty(); 
+			  
+		  }
+		  
+	    }
+	  
+	  
+	  
+	  public void initializeGamesCombobox() {
+		  
+		  for(int i=0; i < gameStore.getAllGames().size();i++) {
+			   String name = gameStore.getAllGames().get(i).getCode();
+			   clientGamesComboBox.getItems().add(name);
+		   }
+	  }
+	  public void initializeClientsTableview() {
+		  
+		  ObservableList<Game> observableList;
+		  observableList = FXCollections.observableArrayList(gameStore.getGames());
+		  ClientGamesTableView.setItems(observableList);
+	  
+		  clientGamesColumn.setCellValueFactory(new PropertyValueFactory<Game,String>("code"));
+	 }
 }
