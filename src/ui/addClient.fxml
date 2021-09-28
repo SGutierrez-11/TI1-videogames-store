@@ -30,7 +30,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="ADD CLIENT: " textFill="#ae20c7" GridPane.columnIndex="2">
+            <Label text="ADD CUSTOMER: " textFill="#ae20c7" GridPane.columnIndex="2">
                <font>
                   <Font name="Times New Roman" size="20.0" />
                </font>
@@ -40,7 +40,7 @@
                   <Image url="@Customer4.png" />
                </image>
             </ImageView>
-            <Label layoutX="210.0" layoutY="66.0" text="Client ID: " textFill="#ae20c7" translateX="-180.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <Label layoutX="210.0" layoutY="66.0" text="Customer ID: " textFill="#ae20c7" translateX="-180.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <font>
                   <Font name="Times New Roman" size="20.0" />
                </font>
@@ -50,7 +50,7 @@
                   <Font name="Times New Roman" size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="clientIDTxT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="139.0" translateX="-270.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <TextField fx:id="clientIDTxT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="139.0" translateX="-260.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
             <ImageView fitHeight="100.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                <image>
                   <Image url="@id-logo-icon-png-svg.png" />
