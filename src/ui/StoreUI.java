@@ -180,7 +180,7 @@ public class StoreUI {
 		  			gameStore.setGamesEmpty();
 		  			initializeClientsTableview();
 		  			initializeGamesCombobox();
-		  			gameStore.setClientsCounted(gameStore.getClientsAmount()+1);
+		  			gameStore.setClientsCounted(gameStore.getClientsCounted()+1);
 		  		}	
 	    }
 	  @FXML
@@ -205,7 +205,7 @@ public class StoreUI {
 			  clientIDTxT.setText("");
 			  clientGamesComboBox.setAccessibleText("");
 			  ClientGamesTableView.refresh();
-			  gameStore.setClientsAmount(gameStore.getClientsAmount()+1);
+			  gameStore.setClientsCounted(gameStore.getClientsCounted()+1);
 			  
 		  }else {
 			 
