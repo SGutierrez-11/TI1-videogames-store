@@ -16,6 +16,10 @@ public class HashTable<T> implements InterfaceHashTable<T> {
 		
 		currentSize = 0;
 		
+		keys = new String[maxSize];
+		
+		values = (T[])new Object[maxSize];
+		
 	}
 
 	@Override

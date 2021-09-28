@@ -10,5 +10,6 @@ public interface Stackable<T> {
 	
 	boolean isEmpty();
 	
+	int size();
 	
 }

@@ -1,7 +1,9 @@
 package model;
 
-import java.util.Hashtable;
 
+import java.util.ArrayList;
+
+import collections.HashTable;
 import collections.LinkedList;
 import collections.Queue;
 import collections.Stack;
@@ -11,17 +13,50 @@ public class Store {
 
 	private int shelvesQuantity;
 	
-	private Hashtable[] shelves;
+	public int getShelvesQuantity() {
+		return shelvesQuantity;
+	}
+
+	public void setShelvesQuantity(int shelvesQuantity) {
+		this.shelvesQuantity = shelvesQuantity;
+	}
+
+	public int getClientsAmount() {
+		return clientsAmount;
+	}
+
+	public void setClientsAmount(int clientsAmount) {
+		this.clientsAmount = clientsAmount;
+	}
+	private int clientsAmount;
+	
+	private HashTable<Game>[] shelves;
 	
 	private Queue<Client> clientsQueue;
 	
+	//private ArrayList<Game>[] gamesLinked;
+	
+	private ArrayList<Game> games;
+	
+	private ArrayList<Game> allGames;
+	
 	private LinkedList<GameStoreThread> cashier;
 	
-	public Store(int shelvesToCreate, int cashierAmount) {
+	int shelvesCounted;
+	
+	int clientsCounted;
+	
+	public Store() {
+		
+	}
+	
+	public Store(int shelvesToCreate, int cashierAmount, int clientsAmount) {
 	
 		shelvesQuantity = shelvesToCreate;
 		
-		shelves = createHashTables(shelvesToCreate);
+		shelves = new HashTable[shelvesToCreate];
+		
+		//createHashTables(shelvesToCreate);
 		
 		clientsQueue = new Queue<Client>();
 		
@@ -29,55 +64,133 @@ public class Store {
 		cashier = new LinkedList<GameStoreThread>(firstThread);
 		createCashiers(shelvesToCreate,1, cashier);
 		
+		this.clientsAmount =  clientsAmount;
+		
+		shelvesCounted = 0;
+		clientsCounted = 0;
+		
+		games = new ArrayList<Game>();
+		
+		allGames = new ArrayList<Game>();
+		
+		//gamesLinked = new ArrayList[shelvesToCreate];
+	}
+	public void addGameToList(String code, int price, int quantity) {
+		
+		Game tmpGame = new Game(code, price, quantity);
+		/*
+		if(gamesLinked[shelvesCounted]==null) {
+			System.out.println("Aqui tambien hay problemas");
+		}	
+		gamesLinked[shelvesCounted].add(tmpGame);
+		*/
+		games.add(tmpGame);
+		allGames.add(tmpGame);
+	}
+	public void addGame(String code) {
+		
+		for(int i=0; i < shelves.length;i++) {
+		
+			if(shelves[i].contains(code)==true) {
+			
+				games.add(shelves[i].get(code));
+				
+			}else {
+				
+			}
+		}
 	}
 	
-	public void createShelves(String game, int position) {
+	/*
+	public void createShelves(String game,int price, int quantity) {
 		
-		String[] values = game.split(" ");
-		Game gameToAdd = new Game(values[0],Integer.parseInt(values[1]),Integer.parseInt(values[2]));
-		shelves[position].put(values[0], gameToAdd);
+		Game gameToAdd = new Game(game,price,quantity);
+		if(shelves[getCurrentShelves()-1]==null) {
+			System.out.println("La Hashtable se esta creando mal");
+		}
+		
+		shelves[(getCurrentShelves()-1)].insert(game, gameToAdd);
 		System.out.println("Codigo: " + gameToAdd.getCode() + " Precio: " + gameToAdd.getPrice()+ " cantidad: " + gameToAdd.getQuantity());
 		
 		
 	}
+	*/
+	public void createHashTable() {
 	
-	public Hashtable[] createHashTables(int toCreate) {
+		ArrayList<Game> newTmp = getGames();
 		
-		Hashtable[] tables = new Hashtable[toCreate];
+		HashTable<Game> tmp = new HashTable<>(newTmp.size());
+		
+		for(int i=0; i < newTmp.size();i++) {
+			
+			tmp.insert(newTmp.get(i).getCode(), newTmp.get(i));
+			
+		}
+		shelves[getCurrentShelves()-1]=tmp;
+		setGamesEmpty();
+	}
+	/*
+	public HashTable<Game>[] createHashTables(int toCreate) {
+		
+		HashTable<Game>[] tables = new HashTable [toCreate];
 		
 		for(int i=0; i < toCreate;i++) {
 			
-			Hashtable tmp = new Hashtable();
-			tables[i] = tmp;
+			//HashTable<Game> tmp = new HashTable<Game>();
+			//tables[i] = tmp;
 		}
 		return tables;
+<<<<<<< HEAD
 	}
 	public void addClienteToQueue(String info) {	
+=======
+>>>>>>> 6a880e081c2c6882ba73513b267e582b35eca8f1
 		
-		String[]data = info.split(" ");
+	}
+	*/
+	public Catalog turnGamesArrayListInCatalog() {
 		
-		String id = data[0];
+		Stack<Game> tmpStack = new Stack();
 		
-		Stack<Game> games = new Stack();
+		ArrayList<Game> tmp = getGames(); 
 		
-		for(int i=0; i < shelves.length;i++) {
+		for(int i=0; i < tmp.size();i++) {
 			
-			if((shelves[i].get(data[1])!=null)) {
-				
-				Game tmp = (Game) shelves[i].get(data[1]);
-				System.out.println("Juego encontrado: " + tmp.getCode() + " Y debia ser: " + data[1]);
-				
-				if(tmp.getQuantity()>=1) {
-				
-					games.push(tmp);
-					System.out.println(games.peek().getCode() + " Entro correctamente");
-				}
-			}
+			tmpStack.push(tmp.get(i));
+			
 		}
-		Catalog clientCatolog = new Catalog(games);
-		Client clientToAdd = new Client(id);
-		clientToAdd.setGames(clientCatolog);
+		Catalog clientCatolog = new Catalog(tmpStack);
+		return clientCatolog;
+	}
+	
+	
+	public void addClienteToQueue(String code) {
+		//Primero crear metodo que convierta de arraylist a stack y este en catalogo catologo
+		//luego ordernar catologo
+		//tercero guardar catologo en el stack games
+		//cuarto convertir el stack games en catologo y setearlo al cliente
+		//quinto añadir cliente al queue
+		
+		Client clientToAdd = new Client(code);
+		//*********************
+		Stack<Game> ordered = new Stack<>();
+		for (int i = 0; i < shelves.length; i++) {
+			for (int j = 0; j < games.size(); j++) {
+				ArrayList<Game> gamesInShelf = new ArrayList<>();
+				if (shelves[i].contains(games.get(j).getCode())) 
+					gamesInShelf.add(games.get(j));
+			}
+			//Falta agregar al stack en el orden necesario
+		}
+		
+		
+		
+		//*************************
+		Catalog tmp = new Catalog(ordered);
+		
+		clientToAdd.setGames(tmp);
 		clientsQueue.add(clientToAdd);
+		setGamesEmpty();
 		
 	}
 	public void createCashiers(int amountToCreate, int amountCreated,LinkedList<GameStoreThread> c) {
@@ -95,17 +208,64 @@ public class Store {
 			
 		}
 	}
-	public void payClient() {
+	public String payClient() {
 		
-		if(clientsQueue.isEmpty()==false) {
+		Stack<Game> stackToPay = new Stack<Game>();
 			
 			Client tmp = clientsQueue.remove();
 			
+			String line = "";
+			
+			String line2 = "";
+			
 			int amountToPlay = 0;
 			
+			for(int i=0; i < tmp.getGames().getGames().size();i++) {
 			
-		}
+			Game tmpGame = tmp.getGames().getGames().peek();
+			
+			 amountToPlay += tmpGame.getPrice();
+			 
+			 stackToPay.push(tmpGame);
+			 line2 += tmpGame.getCode() + " ";
+			}
+			line = ""+amountToPlay;
+			String line3 = line + "\t" + line2;
+			return line3;
+			
 		
 		
 	}
+	public int getCurrentShelves() {
+		return shelvesCounted;
+	}
+	public void setCurrentShelves(int shelvesCounted) {
+		this.shelvesCounted = shelvesCounted;
+	}
+
+	public int getClientsCounted() {
+		return clientsCounted;
+	}
+
+	public void setClientsCounted(int clientsCounted) {
+		this.clientsCounted = clientsCounted;
+	}
+	
+	public ArrayList<Game> getGames(){
+		return games;
+	}
+	public void setGames(ArrayList<Game> games) {
+		
+		this.games = games;
+	}
+	public void setGamesEmpty() {
+		
+		ArrayList<Game> newGames = new ArrayList<Game>();
+		setGames(newGames);
+		
+	}
+	public ArrayList<Game> getAllGames(){
+		return allGames;
+	}
+	
 }
