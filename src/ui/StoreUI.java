@@ -259,7 +259,7 @@ public class StoreUI {
 		 gameOrderTableView.setItems(observableList);
 	    	
 	     gameOrderClientColumn.setCellValueFactory(new PropertyValueFactory<Client,String>("id"));
-	     gameOrderGameColumn.setCellValueFactory(new PropertyValueFactory<Client,String>("allGames"));
+	     gameOrderGameColumn.setCellValueFactory(new PropertyValueFactory<Client,String>("allgames"));
 		 gameOrderTableView.refresh();
 		 
 	 }

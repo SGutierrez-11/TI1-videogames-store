@@ -56,7 +56,7 @@ public class Client {
 			games+= tmpGame.getCode() + ", "; 
 			}
 			
-		}	
+		}
 		allGames = games;
 		return allGames;
 	}
