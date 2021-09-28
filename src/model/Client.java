@@ -45,8 +45,14 @@ public class Client {
 		
 		while(tmpCatalog.getGames().empty()==false) {
 		
+			System.out.println(games + "Paso por aqui");
 			Game tmpGame = tmpCatalog.getGames().pop();
+			
+			if(tmpGame.getCode()=="") {
+				
+			}else {
 			games+= tmpGame.getCode() + ", "; 
+			}
 			
 		}	
 		return games;

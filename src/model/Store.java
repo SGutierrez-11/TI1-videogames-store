@@ -199,8 +199,9 @@ public class Store {
 		
 		//*************************
 		Catalog tmp = new Catalog(ordered);
+		clientToAdd.setGames(turnGamesArrayListInCatalog());
 		
-		clientToAdd.setGames(tmp);
+		//clientToAdd.setGames(tmp);
 		clientsQueue.add(clientToAdd);
 		setGamesEmpty();
 		
@@ -288,6 +289,7 @@ public class Store {
 		
 		while(clients.isEmpty()==false) {
 		
+			System.out.println("Entra al while");
 			Client toRemove = clients.remove();
 			tmpClients.add(toRemove);
 			
