@@ -177,11 +177,15 @@ public class Store {
 		//cuarto convertir el stack games en catologo y setearlo al cliente
 		//quinto añadir cliente al queue
 		
+		
+		System.out.println("Entra al add");
 		Client clientToAdd = new Client(code);
 		//*********************
 		Stack<Game> ordered = new Stack<>();
 		for (int i = 0; i < shelves.length; i++) {
+			System.out.println("Entra al primer for");
 			for (int j = 0; j < games.size(); j++) {
+				System.out.println("Entra al segundo for");
 				ArrayList<Game> gamesInShelf = new ArrayList<>();
 				if (shelves[i].contains(games.get(j).getCode())) 
 					gamesInShelf.add(games.get(j));
