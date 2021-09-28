@@ -89,14 +89,20 @@ public class Store {
 	}
 	public void addGame(String code) {
 		
-		for(int i=0; i < shelves.length;i++) {
 		
-			if(shelves[i].contains(code)==true) {
+		
+		for(int i=0; i < allGames.size();i++) {
+		
+			//System.out.println("Entra al For");
+			//System.out.println("El allGames.getCode es:" + allGames.get(i).getCode());
+			if(allGames.get(i).getCode()==code) {
 			
-				games.add(shelves[i].get(code));
+				//System.out.println("El juego se esta añadiendo");
+				games.add(allGames.get(i));
 				
 			}else {
 				
+				//System.out.println("Entro al else");
 			}
 		}
 	}

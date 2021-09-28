@@ -68,10 +68,10 @@
                       <TableColumn fx:id="clientGamesColumn" prefWidth="273.0" text="Games" />
                     </columns>
                   </TableView>
-                  <Button mnemonicParsing="false" onAction="#addGameToClient" text="Add" translateX="25.0" translateY="238.0" />
                </children>
             </Pane>
             <ComboBox fx:id="clientGamesComboBox" prefWidth="150.0" translateX="-75.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" onAction="#addGameToClient" text="Add Game" translateX="30.0" translateY="15.0" GridPane.columnIndex="3" />
          </children>
       </GridPane>
    </center>
@@ -79,12 +79,15 @@
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints />
+            <RowConstraints />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" onAction="#thirdStep" text="Next" translateX="360.0" />
+            <Button mnemonicParsing="false" onAction="#thirdStep" text="Next" translateX="360.0" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </bottom>
