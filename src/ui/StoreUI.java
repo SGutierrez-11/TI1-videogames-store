@@ -15,6 +15,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
+import model.Client;
 import model.Game;
 import model.Store;
 
@@ -79,6 +80,15 @@ public class StoreUI {
     @FXML
     private ComboBox<String> clientGamesComboBox;
 
+    //***************** Game Order **************
+    @FXML
+    private TableView<Client> gameOrderTableView;
+
+    @FXML
+    private TableColumn<Client, String> gameOrderClientColumn;
+
+    @FXML
+    private TableColumn<Client, String> gameOrderGameColumn;
     
 	//public StoreUI() {
 		
@@ -204,7 +214,8 @@ public class StoreUI {
 	  	    	Parent menuPane = fxmlLoader.load();
 	  	    	mainPane.getChildren().setAll(menuPane);
 	  			gameStore.setGamesEmpty(); 
-			  
+	  			initializeGameOrderTableview();
+	  			
 		  }
 		  
 	    }
@@ -226,4 +237,22 @@ public class StoreUI {
 	  
 		  clientGamesColumn.setCellValueFactory(new PropertyValueFactory<Game,String>("code"));
 	 }
+	 public void initializeGameOrderTableview() {
+		 
+		 ObservableList<Client> observableList;
+		 observableList = FXCollections.observableArrayList(gameStore.getClientsList());
+		 gameOrderTableView.setItems(observableList);
+	    	
+	     gameOrderClientColumn.setCellValueFactory(new PropertyValueFactory<Client,String>("code"));
+	     gameOrderGameColumn.setCellValueFactory(new PropertyValueFactory<Client,String>("allGames"));
+		 
+		 
+	 }
+	 @FXML
+	 public void forthStep(ActionEvent event) {
+
+		 
+		 
+	    }
+	 
 }

@@ -187,8 +187,10 @@ public class Store {
 			for (int j = 0; j < games.size(); j++) {
 				System.out.println("Entra al segundo for");
 				ArrayList<Game> gamesInShelf = new ArrayList<>();
-				if (shelves[i].contains(games.get(j).getCode())) 
+				if (shelves[i].contains(games.get(j).getCode())) { 
+					System.out.println("Paso del if");
 					gamesInShelf.add(games.get(j));
+				}
 			}
 			//Falta agregar al stack en el orden necesario
 		}
@@ -276,6 +278,21 @@ public class Store {
 	}
 	public ArrayList<Game> getAllGames(){
 		return allGames;
+	}
+	public ArrayList<Client> getClientsList(){
+		
+		ArrayList<Client> tmpClients = new ArrayList<>();
+		
+		Queue<Client> clients = clientsQueue;
+		
+		
+		while(clients.isEmpty()==false) {
+		
+			Client toRemove = clients.remove();
+			tmpClients.add(toRemove);
+			
+		}
+		return tmpClients;
 	}
 	
 }

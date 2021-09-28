@@ -37,6 +37,20 @@ public class Client {
 	public void setToPay(int toPay) {
 		this.toPay = toPay;
 	}
+	public String getAllGames() {
+		
+		String games = "";
+		
+		Catalog tmpCatalog = getGames();
+		
+		while(tmpCatalog.getGames().empty()==false) {
+		
+			Game tmpGame = tmpCatalog.getGames().pop();
+			games+= tmpGame.getCode() + ", "; 
+			
+		}	
+		return games;
+	}
 	
 	
 	
