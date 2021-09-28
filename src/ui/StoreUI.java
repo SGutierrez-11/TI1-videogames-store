@@ -90,6 +90,21 @@ public class StoreUI {
     @FXML
     private TableColumn<Client, String> gameOrderGameColumn;
     
+    //************** Client Pay Pane **************
+    
+    @FXML
+    private TableView<Client> gamePayOrderTableView;
+
+    @FXML
+    private TableColumn<Client, String> gamePayClientColumn;
+
+    @FXML
+    private TableColumn<Client, String> gamePayGameColumn;
+
+    @FXML
+    private TableColumn<Client, Integer> gamePayAmount;
+    
+    
 	//public StoreUI() {
 		
 	//}
@@ -215,7 +230,7 @@ public class StoreUI {
 	  	    	mainPane.getChildren().setAll(menuPane);
 	  			gameStore.setGamesEmpty(); 
 	  			initializeGameOrderTableview();
-	  			
+	  			gameOrderTableView.refresh();
 		  }
 		  
 	    }
@@ -245,14 +260,35 @@ public class StoreUI {
 	    	
 	     gameOrderClientColumn.setCellValueFactory(new PropertyValueFactory<Client,String>("id"));
 	     gameOrderGameColumn.setCellValueFactory(new PropertyValueFactory<Client,String>("allGames"));
-		 
+		 gameOrderTableView.refresh();
 		 
 	 }
 	 @FXML
-	 public void forthStep(ActionEvent event) {
+	 public void forthStep(ActionEvent event) throws IOException {
 
+		 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("clientExit.fxml"));
+			fxmlLoader.setController(this);
+	    	Parent menuPane = fxmlLoader.load();
+	    	mainPane.getChildren().setAll(menuPane);
+			gameStore.setGamesEmpty(); 
+			gameStore.starThreads();
+			initializeCustomerPayTableview();
+			gamePayOrderTableView.refresh();
+			
+	 }
+	 public void initializeCustomerPayTableview() {
 		 
+		 ObservableList<Client> observableList;
+		 observableList = FXCollections.observableArrayList(gameStore.getFinalClient());
+		 gamePayOrderTableView.setItems(observableList);
+	    	
+	     gamePayClientColumn.setCellValueFactory(new PropertyValueFactory<Client,String>("id"));
+	     gamePayGameColumn.setCellValueFactory(new PropertyValueFactory<Client,String>("allGames"));
+	     gamePayAmount.setCellValueFactory(new PropertyValueFactory<Client,Integer>("toPay"));
+	     
+	     gameOrderTableView.refresh();
 		 
-	    }
+	 }
+	 
 	 
 }

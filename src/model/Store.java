@@ -42,6 +42,8 @@ public class Store {
 	
 	private LinkedList<GameStoreThread> cashier;
 	
+	private ArrayList<Client> finalCustomerList;
+	
 	int shelvesCounted;
 	
 	int clientsCounted;
@@ -60,7 +62,7 @@ public class Store {
 		
 		clientsQueue = new Queue<Client>();
 		
-		GameStoreThread firstThread = new GameStoreThread(this, 20);
+		GameStoreThread firstThread = new GameStoreThread(this);
 		cashier = new LinkedList<GameStoreThread>(firstThread);
 		createCashiers(shelvesToCreate,1, cashier);
 		
@@ -72,6 +74,8 @@ public class Store {
 		games = new ArrayList<Game>();
 		
 		allGames = new ArrayList<Game>();
+		
+		finalCustomerList = new ArrayList<Client>();
 		
 		//gamesLinked = new ArrayList[shelvesToCreate];
 	}
@@ -187,13 +191,16 @@ public class Store {
 			for (int j = 0; j < games.size(); j++) {
 				System.out.println("Entra al segundo for");
 				ArrayList<Game> gamesInShelf = new ArrayList<>();
-				if (shelves[i].contains(games.get(j).getCode())) { 
+				if (shelves[i].contains(games.get(j).getCode())) {
 					System.out.println("Paso del if");
 					gamesInShelf.add(games.get(j));
+					
+						
+					}
 				}
 			}
 			//Falta agregar al stack en el orden necesario
-		}
+		
 		
 		
 		
@@ -210,7 +217,7 @@ public class Store {
 		
 		if(amountToCreate > amountCreated) {
 		
-			GameStoreThread tmpThread = new GameStoreThread(this,10);
+			GameStoreThread tmpThread = new GameStoreThread(this);
 			LinkedList<GameStoreThread> tmpGameLinkedList = new LinkedList<GameStoreThread>(tmpThread);
 			c.setNext(tmpGameLinkedList);
 			createCashiers(amountToCreate, amountCreated+1, tmpGameLinkedList);
@@ -221,11 +228,13 @@ public class Store {
 			
 		}
 	}
-	public String payClient() {
+	public void payClient() throws InterruptedException {	
 		
-		Stack<Game> stackToPay = new Stack<Game>();
+			Stack<Game> stackToPay = new Stack<Game>();
 			
-			Client tmp = clientsQueue.remove();
+			Queue<Client> copy = clientsQueue;
+			
+			Client tmp = copy.remove();
 			
 			String line = "";
 			
@@ -235,20 +244,20 @@ public class Store {
 			
 			for(int i=0; i < tmp.getGames().getGames().size();i++) {
 			
-			Game tmpGame = tmp.getGames().getGames().peek();
+			Game tmpGame = tmp.getGames().getGames().pop();
+			
+			Thread.sleep(1000);
 			
 			 amountToPlay += tmpGame.getPrice();
 			 
 			 stackToPay.push(tmpGame);
 			 line2 += tmpGame.getCode() + " ";
 			}
-			line = ""+amountToPlay;
-			String line3 = line + "\t" + line2;
-			return line3;
-			
-		
-		
+			tmp.setToPay(amountToPlay);
+			tmp.setAllGames(line2);
+			finalCustomerList.add(tmp);
 	}
+	
 	public int getCurrentShelves() {
 		return shelvesCounted;
 	}
@@ -291,10 +300,35 @@ public class Store {
 		
 			System.out.println("Entra al while");
 			Client toRemove = clients.remove();
+			System.out.println("Se añade el cliente: " + toRemove.getId() + " Con juegos: " + toRemove.getAllGames());
 			tmpClients.add(toRemove);
 			
 		}
 		return tmpClients;
 	}
-	
+
+	public Queue<Client> getClientsQueue() {
+		return clientsQueue;
+	}
+
+	public void setClientsQueue(Queue<Client> clientsQueue) {
+		this.clientsQueue = clientsQueue;
+	}
+	public ArrayList<Client> getFinalClient(){
+		return finalCustomerList;
+	}
+	public void starThreads() {
+		
+		GameStoreThread tmp = cashier.getObject();
+		tmp.start();
+		
+		
+		while(cashier.getNext()!=null) {
+			
+			tmp = cashier.getNext().getObject();
+			tmp.start();
+			
+			
+		}	
+	}
 }

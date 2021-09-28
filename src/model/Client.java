@@ -6,6 +6,8 @@ public class Client {
 	
 	private Catalog games;
 	
+	private String allGames;
+	
 	private int toPay;
 	
 	public Client(String id) {
@@ -55,7 +57,12 @@ public class Client {
 			}
 			
 		}	
-		return games;
+		games = allGames;
+		return allGames;
+	}
+
+	public void setAllGames(String allGames) {
+		this.allGames = allGames;
 	}
 	
 	

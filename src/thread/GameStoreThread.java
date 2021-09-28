@@ -6,17 +6,21 @@ public class GameStoreThread extends Thread{
 
 	private Store gameStore;
 	
-	private long sleepTime;
-	
-	public GameStoreThread(Store gameStore,long sleepTime) {
+	public GameStoreThread(Store gameStore) {
 		
 		this.gameStore = gameStore;
-		this.sleepTime = sleepTime;
+		
 	}
 	@Override
 	public void run() {
 		try {
-			Thread.sleep(20000);
+			while(gameStore.getClientsQueue().isEmpty()==false) {
+				
+				gameStore.payClient();
+				
+				Thread.sleep(2000);
+			}
+			
 		} catch (InterruptedException e1) {
 			
 			e1.printStackTrace();
