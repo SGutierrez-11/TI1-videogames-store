@@ -320,13 +320,13 @@ public class Store {
 	public void starThreads() {
 		
 		GameStoreThread tmp = cashier.getObject();
-		tmp.start();
+		tmp.run();
 		
 		
 		while(cashier.getNext()!=null) {
 			
 			tmp = cashier.getNext().getObject();
-			tmp.start();
+			tmp.run();
 			
 			
 		}	

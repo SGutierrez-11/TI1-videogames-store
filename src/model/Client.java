@@ -57,7 +57,7 @@ public class Client {
 			}
 			
 		}	
-		games = allGames;
+		allGames = games;
 		return allGames;
 	}
 
