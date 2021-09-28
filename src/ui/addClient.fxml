@@ -30,7 +30,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="ADD CLIENT: " textFill="#ae20c7" GridPane.columnIndex="2">
+            <Label text="ADD CUSTOMER: " textFill="#ae20c7" GridPane.columnIndex="2">
                <font>
                   <Font name="Times New Roman" size="20.0" />
                </font>
@@ -40,7 +40,7 @@
                   <Image url="@Customer4.png" />
                </image>
             </ImageView>
-            <Label layoutX="210.0" layoutY="66.0" text="Client ID: " textFill="#ae20c7" translateX="-180.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <Label layoutX="210.0" layoutY="66.0" text="Customer ID: " textFill="#ae20c7" translateX="-180.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <font>
                   <Font name="Times New Roman" size="20.0" />
                </font>
@@ -50,7 +50,7 @@
                   <Font name="Times New Roman" size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="clientIDTxT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="139.0" translateX="-270.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <TextField fx:id="clientIDTxT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="139.0" translateX="-260.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
             <ImageView fitHeight="100.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                <image>
                   <Image url="@id-logo-icon-png-svg.png" />
@@ -68,10 +68,10 @@
                       <TableColumn fx:id="clientGamesColumn" prefWidth="273.0" text="Games" />
                     </columns>
                   </TableView>
-                  <Button mnemonicParsing="false" onAction="#addGameToClient" text="Add" translateX="25.0" translateY="238.0" />
                </children>
             </Pane>
             <ComboBox fx:id="clientGamesComboBox" prefWidth="150.0" translateX="-75.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" onAction="#addGameToClient" text="Add Game" translateX="30.0" translateY="15.0" GridPane.columnIndex="3" />
          </children>
       </GridPane>
    </center>
@@ -79,12 +79,15 @@
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints />
+            <RowConstraints />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" onAction="#thirdStep" text="Next" translateX="360.0" />
+            <Button mnemonicParsing="false" onAction="#thirdStep" text="Next" translateX="360.0" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </bottom>

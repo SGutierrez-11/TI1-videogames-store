@@ -176,7 +176,7 @@ public class StoreUI {
 	  @FXML
 	   public void addGameToClient(ActionEvent event) {
 
-		String game = clientGamesComboBox.getAccessibleText();
+		String game = clientGamesComboBox.getValue();
 		  
 			gameStore.addGame(game);
 			initializeClientsTableview();
