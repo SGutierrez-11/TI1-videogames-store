@@ -261,7 +261,7 @@ public class Store {
 			
 			Game tmpGame = tmp.getGames().getGames().pop();
 			
-			Thread.sleep(1000);
+			Thread.sleep(3000);
 			
 			amountToPlay += tmpGame.getPrice();
 			 
@@ -271,6 +271,8 @@ public class Store {
 			tmp.setToPay(amountToPlay);
 			tmp.setAllGames(line2);
 			finalCustomerList.add(tmp);
+			
+			System.out.println("Se ejecuto el hilo 1");
 	}
 	
 	public int getCurrentShelves() {

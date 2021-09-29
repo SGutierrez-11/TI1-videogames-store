@@ -18,6 +18,7 @@ import javafx.scene.layout.BorderPane;
 import model.Client;
 import model.Game;
 import model.Store;
+import thread.GameStoreThread2;
 
 public class StoreUI {
 
@@ -280,6 +281,8 @@ public class StoreUI {
 			gameStore.starThreads();
 			initializeCustomerPayTableview();
 			gamePayOrderTableView.refresh();
+			GameStoreThread2 refreshThread = new GameStoreThread2(this);
+			refreshThread.run();
 			
 	 }
 	 public void initializeCustomerPayTableview() {
