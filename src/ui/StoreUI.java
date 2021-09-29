@@ -257,9 +257,14 @@ public class StoreUI {
 		 ObservableList<Client> observableList;
 		 observableList = FXCollections.observableArrayList(gameStore.getClientsList());
 		 gameOrderTableView.setItems(observableList);
+		 for(int i=0; i < gameStore.getClientsList().size();i++) {
+			 
+			 System.out.println(gameStore.getClientsList().get(i).getAllGames()+gameStore.getClientsList().get(i).getId());
+			 
+		 }
 	    	
 	     gameOrderClientColumn.setCellValueFactory(new PropertyValueFactory<Client,String>("id"));
-	     gameOrderGameColumn.setCellValueFactory(new PropertyValueFactory<Client,String>("allgames"));
+	     gameOrderGameColumn.setCellValueFactory(new PropertyValueFactory<Client,String>("allGames"));
 		 gameOrderTableView.refresh();
 		 
 	 }
