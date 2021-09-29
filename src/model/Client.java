@@ -49,18 +49,19 @@ public class Client {
 		Stack<Game> tmpStack2 = new Stack<Game>();
 		
 		
-		Catalog tmpCatalog = getGames();
+		//Catalog tmpCatalog = getGames();
 		
-		while(tmpCatalog.getGames().empty()==false) {
+		while(getGames().getGames().empty()==false) {
 		
-			System.out.println(games + "Paso por aqui");
-			Game tmpGame = tmpCatalog.getGames().pop();
+			//System.out.println(games + "Paso por aqui");
+			Game tmpGame =getGames().getGames().pop();
 			tmpStack.push(tmpGame);
 			
 			if(tmpGame.getCode()=="") {
 				
 			}else {
 			games+= tmpGame.getCode() + ", "; 
+			System.out.println("Games: " + games);
 			}
 			
 		}
@@ -70,8 +71,8 @@ public class Client {
 			tmpStack2.push(tmpGame2);
 			
 		}
-		getGames().setGames(tmpStack2);
 		allGames = games;
+		getGames().setGames(tmpStack2);
 		return allGames;
 	}
 
