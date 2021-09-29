@@ -222,7 +222,7 @@ public class Store {
 		System.out.println("Catalog size: " + tmp.getGames().size());
 		clientToAdd.setGames(tmp);
 		clientsQueue.add(clientToAdd);
-		System.out.println("Me quiero matar: " + clientsQueue.peek().getGames().getGames().size());
+		//System.out.println("Me quiero matar: " + clientsQueue.peek().getGames().getGames().size());
 		toShowClients.add(clientToAdd);
 		setGamesEmpty();
 	}

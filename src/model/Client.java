@@ -47,7 +47,7 @@ public class Client {
 		
 		Stack<Game> clone = new Stack<Game>(); 
 		
-		Catalog tmpCatalog = getGames().clone();
+		Catalog tmpCatalog = new Catalog(getGames().getGames());
 		
 		while(tmpCatalog.getGames().empty()==false) {
 		

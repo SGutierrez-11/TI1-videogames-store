@@ -267,7 +267,7 @@ public class StoreUI {
 	    	
 	     gameOrderClientColumn.setCellValueFactory(new PropertyValueFactory<Client,String>("id"));
 	     gameOrderGameColumn.setCellValueFactory(new PropertyValueFactory<Client,String>("allGames"));
-		 gameOrderTableView.refresh();
+		 
 		 
 	 }
 	 @FXML
