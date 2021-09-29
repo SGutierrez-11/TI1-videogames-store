@@ -188,20 +188,29 @@ public class Store {
 		Stack<Game> ordered = new Stack<>();
 		for (int i = 0; i < shelves.length; i++) {
 			System.out.println("Entra al primer for");
+			ArrayList<Game> gamesInShelf = new ArrayList<>();
 			for (int j = 0; j < games.size(); j++) {
 				System.out.println("Entra al segundo for");
-				ArrayList<Game> gamesInShelf = new ArrayList<>();
 				if (shelves[i].contains(games.get(j).getCode())) {
 					System.out.println("Paso del if");
 					gamesInShelf.add(games.get(j));
-					
-						
+				}
+			}
+			//Bubble Sort
+			for (int j = 0; j < gamesInShelf.size(); j++) {
+				for (int k = 0; k < gamesInShelf.size()-j-1; k++) {
+					if (shelves[i].hash(gamesInShelf.get(j).getCode())>shelves[i].hash(gamesInShelf.get(j+1).getCode())) {
+						Game temp = gamesInShelf.get(j);
+						gamesInShelf.set(j, gamesInShelf.get(j+1));
+						gamesInShelf.set(j+1, temp);
 					}
 				}
 			}
-			//Falta agregar al stack en el orden necesario
-		
-		
+			for (int j = 0; j < gamesInShelf.size(); j++) {
+				ordered.push(gamesInShelf.get(j));
+				System.out.println("Hash: "+shelves[i].hash(gamesInShelf.get(j).getCode()));
+			}
+		}
 		
 		
 		//*************************
