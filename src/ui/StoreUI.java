@@ -15,8 +15,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
+import model.Client;
 import model.Game;
 import model.Store;
+import thread.GameStoreThread2;
 
 public class StoreUI {
 
@@ -79,6 +81,30 @@ public class StoreUI {
     @FXML
     private ComboBox<String> clientGamesComboBox;
 
+    //***************** Game Order **************
+    @FXML
+    private TableView<Client> gameOrderTableView;
+
+    @FXML
+    private TableColumn<Client, String> gameOrderClientColumn;
+
+    @FXML
+    private TableColumn<Client, String> gameOrderGameColumn;
+    
+    //************** Client Pay Pane **************
+    
+    @FXML
+    private TableView<Client> gamePayOrderTableView;
+
+    @FXML
+    private TableColumn<Client, String> gamePayClientColumn;
+
+    @FXML
+    private TableColumn<Client, String> gamePayGameColumn;
+
+    @FXML
+    private TableColumn<Client, Integer> gamePayAmount;
+    
     
 	//public StoreUI() {
 		
@@ -170,7 +196,7 @@ public class StoreUI {
 		  			gameStore.setGamesEmpty();
 		  			initializeClientsTableview();
 		  			initializeGamesCombobox();
-		  			gameStore.setClientsCounted(gameStore.getClientsAmount()+1);
+		  			gameStore.setClientsCounted(gameStore.getClientsCounted()+1);
 		  		}	
 	    }
 	  @FXML
@@ -195,7 +221,7 @@ public class StoreUI {
 			  clientIDTxT.setText("");
 			  clientGamesComboBox.setAccessibleText("");
 			  ClientGamesTableView.refresh();
-			  gameStore.setClientsAmount(gameStore.getClientsAmount()+1);
+			  gameStore.setClientsCounted(gameStore.getClientsCounted()+1);
 			  
 		  }else {
 			 
@@ -204,7 +230,8 @@ public class StoreUI {
 	  	    	Parent menuPane = fxmlLoader.load();
 	  	    	mainPane.getChildren().setAll(menuPane);
 	  			gameStore.setGamesEmpty(); 
-			  
+	  			initializeGameOrderTableview();
+	  			gameOrderTableView.refresh();
 		  }
 		  
 	    }
@@ -226,4 +253,68 @@ public class StoreUI {
 	  
 		  clientGamesColumn.setCellValueFactory(new PropertyValueFactory<Game,String>("code"));
 	 }
+	 public void initializeGameOrderTableview() {
+		 
+		 ObservableList<Client> observableList;
+		 observableList = FXCollections.observableArrayList(gameStore.getToShowClients());
+		 gameOrderTableView.setItems(observableList);
+		 //System.out.println("El tamanio es: " + gameStore.getClientsList().size()how);
+		 //for(int i=0; i < gameStore.getClientsList().size();i++) {
+			 
+			// System.out.println("Esto debe mostrar"+gameStore.getClientsList().get(i).getAllGames()+gameStore.getClientsList().get(i).getId());
+			 
+		 //}
+	    	
+	     gameOrderClientColumn.setCellValueFactory(new PropertyValueFactory<Client,String>("id"));
+	     gameOrderGameColumn.setCellValueFactory(new PropertyValueFactory<Client,String>("allGames"));
+		 gameOrderTableView.refresh();
+		 
+	 }
+	 @FXML
+	 public void forthStep(ActionEvent event) throws IOException {
+		 	
+		 	
+		 gameStore.starThreads();
+		 gameStore.setGamesEmpty(); 
+			changeScreenForForthStep();
+			
+			//GameStoreThread2 refreshThread = new GameStoreThread2(this);
+			//refreshThread.run();
+			
+	}
+	 public void changeScreenForForthStep() throws IOException {
+		 
+		 
+		 if(gameStore.getClientsQueue().isEmpty()==false) {
+		 		
+		 		changeScreenForForthStep();
+		 		
+		 	}else {
+		 
+		 	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("clientExit.fxml"));
+			fxmlLoader.setController(this);
+	    	Parent menuPane = fxmlLoader.load();
+	    	mainPane.getChildren().setAll(menuPane); 
+	    	
+	    	//gameStore.starThreads();
+			initializeCustomerPayTableview();
+			gamePayOrderTableView.refresh();
+		 	}
+		 
+	 }
+	 public void initializeCustomerPayTableview() {
+		 
+		 ObservableList<Client> observableList;
+		 observableList = FXCollections.observableArrayList(gameStore.getFinalClient());
+		 gamePayOrderTableView.setItems(observableList);
+	    	
+	     gamePayClientColumn.setCellValueFactory(new PropertyValueFactory<Client,String>("id"));
+	     gamePayGameColumn.setCellValueFactory(new PropertyValueFactory<Client,String>("allGames"));
+	     gamePayAmount.setCellValueFactory(new PropertyValueFactory<Client,Integer>("toPay"));
+	     
+	     gameOrderTableView.refresh();
+		 
+	 }
+	 
+	 
 }

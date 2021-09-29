@@ -1,5 +1,7 @@
 package collections;
 
+import java.util.ArrayList;
+
 public class HashTable<T> implements InterfaceHashTable<T> {
 
 	private int currentSize;
@@ -8,7 +10,7 @@ public class HashTable<T> implements InterfaceHashTable<T> {
 	
 	private String[] keys;
 	
-	private T[] values;
+	private ArrayList<T> values;
 	
 	public HashTable(int maxSize){
 		
@@ -18,8 +20,13 @@ public class HashTable<T> implements InterfaceHashTable<T> {
 		
 		keys = new String[maxSize];
 		
-		values = (T[])new Object[maxSize];
+		values = new ArrayList<T>();
 		
+		for(int i=0; i < maxSize;i++) {
+			
+			values.add(null);
+			
+		}
 	}
 
 	@Override
@@ -52,6 +59,7 @@ public class HashTable<T> implements InterfaceHashTable<T> {
 	@Override
 	public boolean contains(String key) {
 		
+		System.out.println("Llega al contains");
 		if(get(key)==null) {
 			return true;
 		
@@ -75,19 +83,21 @@ public class HashTable<T> implements InterfaceHashTable<T> {
 		System.out.println(tmp);
 		
 		int i = tmp;
-		
-		do {
 			
+		do {
+			while(i<0) {
+				i = (i+1)% maxSize;
+			}	
 			if(keys[i]==null) {
 				
 				keys[i] = key;
-				values[i] = element;
+				values.set(i, element);
 				currentSize+=1;
 				return;
 			}
 			if(keys[i].equals(key)) {
 				
-				values[i] = element;
+				values.set(i, element);
 			}
 			i = (i+1)% maxSize;
 		}while(i!=tmp);
@@ -96,8 +106,26 @@ public class HashTable<T> implements InterfaceHashTable<T> {
 	@Override
 	public T get(String key) {
 		
-		int i = hash(key);
+		int i = 0;
+		System.out.println("Entra al get");
+		boolean out = false;
 		
+		for(int j=0; j < keys.length && out==false;j++) {
+			
+			if(keys[j]==key) {
+			
+				i = j;
+				out = true;
+				
+			}
+		}
+		if(out==true) {
+			return values.get(i);
+		}else {
+			return null;
+		}
+		//return null;
+		/*
 		while(keys[i]!=null) {
 		
 			if(keys[i].equals(key)) {
@@ -110,7 +138,7 @@ public class HashTable<T> implements InterfaceHashTable<T> {
 		}
 		
 		return null;
+	}*/
 	}
-	
 	
 }

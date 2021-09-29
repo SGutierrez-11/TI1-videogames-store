@@ -6,6 +6,8 @@ public class Client {
 	
 	private Catalog games;
 	
+	private String allGames;
+	
 	private int toPay;
 	
 	public Client(String id) {
@@ -36,6 +38,31 @@ public class Client {
 
 	public void setToPay(int toPay) {
 		this.toPay = toPay;
+	}
+	public String getAllGames() {
+		
+		String games = "";
+		
+		Catalog tmpCatalog = getGames();
+		
+		while(tmpCatalog.getGames().empty()==false) {
+		
+			System.out.println(games + "Paso por aqui");
+			Game tmpGame = tmpCatalog.getGames().pop();
+			
+			if(tmpGame.getCode()=="") {
+				
+			}else {
+			games+= tmpGame.getCode() + ", "; 
+			}
+			
+		}
+		allGames = games;
+		return allGames;
+	}
+
+	public void setAllGames(String allGames) {
+		this.allGames = allGames;
 	}
 	
 	

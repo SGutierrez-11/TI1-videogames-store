@@ -40,12 +40,24 @@ public class Store {
 	
 	private ArrayList<Game> allGames;
 	
-	private LinkedList<GameStoreThread> cashier;
+	private Queue<GameStoreThread> cashier;
+	
+	private ArrayList<Client> finalCustomerList;
+	
+	private ArrayList<Client> toShowClients;
 	
 	int shelvesCounted;
 	
 	int clientsCounted;
 	
+	public ArrayList<Client> getToShowClients() {
+		return toShowClients;
+	}
+
+	public void setToShowClients(ArrayList<Client> toShowClients) {
+		this.toShowClients = toShowClients;
+	}
+
 	public Store() {
 		
 	}
@@ -60,9 +72,9 @@ public class Store {
 		
 		clientsQueue = new Queue<Client>();
 		
-		GameStoreThread firstThread = new GameStoreThread(this, 20);
-		cashier = new LinkedList<GameStoreThread>(firstThread);
-		createCashiers(shelvesToCreate,1, cashier);
+		GameStoreThread firstThread = new GameStoreThread(this);
+		cashier = new Queue();
+		createCashiers(cashierAmount);
 		
 		this.clientsAmount =  clientsAmount;
 		
@@ -72,6 +84,10 @@ public class Store {
 		games = new ArrayList<Game>();
 		
 		allGames = new ArrayList<Game>();
+		
+		finalCustomerList = new ArrayList<Client>();
+		
+		toShowClients = new ArrayList<Client>();
 		
 		//gamesLinked = new ArrayList[shelvesToCreate];
 	}
@@ -156,7 +172,7 @@ public class Store {
 	*/
 	public Catalog turnGamesArrayListInCatalog() {
 		
-		Stack<Game> tmpStack = new Stack();
+		Stack<Game> tmpStack = new Stack<Game>();
 		
 		ArrayList<Game> tmp = getGames(); 
 		
@@ -171,39 +187,46 @@ public class Store {
 	
 	
 	public void addClienteToQueue(String code) {
-		//Primero crear metodo que convierta de arraylist a stack y este en catalogo catologo
-		//luego ordernar catologo
-		//tercero guardar catologo en el stack games
-		//cuarto convertir el stack games en catologo y setearlo al cliente
-		//quinto añadir cliente al queue
-		
+		System.out.println("Entra al add");
 		Client clientToAdd = new Client(code);
 		//*********************
 		Stack<Game> ordered = new Stack<>();
 		for (int i = 0; i < shelves.length; i++) {
+			System.out.println("Entra al primer for");
+			ArrayList<Game> gamesInShelf = new ArrayList<>();
 			for (int j = 0; j < games.size(); j++) {
-				ArrayList<Game> gamesInShelf = new ArrayList<>();
-				if (shelves[i].contains(games.get(j).getCode())) 
+				System.out.println("Entra al segundo for");
+				if (shelves[i].contains(games.get(j).getCode())) {
+					System.out.println("Paso del if");
 					gamesInShelf.add(games.get(j));
+				}
 			}
-			//Falta agregar al stack en el orden necesario
+			//Bubble Sort
+			for (int j = 0; j < gamesInShelf.size(); j++) {
+				for (int k = 0; k < gamesInShelf.size()-j-1; k++) {
+					if (shelves[i].hash(gamesInShelf.get(j).getCode())>shelves[i].hash(gamesInShelf.get(j+1).getCode())) {
+						Game temp = gamesInShelf.get(j);
+						gamesInShelf.set(j, gamesInShelf.get(j+1));
+						gamesInShelf.set(j+1, temp);
+					}
+				}
+			}
+			for (int j = 0; j < gamesInShelf.size(); j++) {
+				ordered.push(gamesInShelf.get(j));
+				System.out.println("Hash: "+shelves[i].hash(gamesInShelf.get(j).getCode()));
+			}
 		}
-		
-		
-		
-		//*************************
 		Catalog tmp = new Catalog(ordered);
-		
 		clientToAdd.setGames(tmp);
 		clientsQueue.add(clientToAdd);
+		toShowClients.add(clientToAdd);
 		setGamesEmpty();
-		
 	}
-	public void createCashiers(int amountToCreate, int amountCreated,LinkedList<GameStoreThread> c) {
-		
+	public void createCashiers(int amountCreated) {
+		/*
 		if(amountToCreate > amountCreated) {
 		
-			GameStoreThread tmpThread = new GameStoreThread(this,10);
+			GameStoreThread tmpThread = new GameStoreThread(this);
 			LinkedList<GameStoreThread> tmpGameLinkedList = new LinkedList<GameStoreThread>(tmpThread);
 			c.setNext(tmpGameLinkedList);
 			createCashiers(amountToCreate, amountCreated+1, tmpGameLinkedList);
@@ -213,14 +236,20 @@ public class Store {
 			return;
 			
 		}
-	}
-	public String payClient() {
+		*/
+		for(int i=0; i < amountCreated;i++) {
+			
+			GameStoreThread tmp = new GameStoreThread(this);
+			cashier.add(tmp);
+			
+		}
 		
-		Stack<Game> stackToPay = new Stack<Game>();
+	}
+	public void payClient() throws InterruptedException {	
+		
+			Stack<Game> stackToPay = new Stack<Game>();
 			
 			Client tmp = clientsQueue.remove();
-			
-			String line = "";
 			
 			String line2 = "";
 			
@@ -228,20 +257,26 @@ public class Store {
 			
 			for(int i=0; i < tmp.getGames().getGames().size();i++) {
 			
-			Game tmpGame = tmp.getGames().getGames().peek();
+			System.out.println("Entra al for del hilo");	
+				
+			Game tmpGame = tmp.getGames().getGames().pop();
 			
-			 amountToPlay += tmpGame.getPrice();
+			Thread.sleep(3000);
+			
+			amountToPlay += tmpGame.getPrice();
 			 
+			
+			
 			 stackToPay.push(tmpGame);
 			 line2 += tmpGame.getCode() + " ";
 			}
-			line = ""+amountToPlay;
-			String line3 = line + "\t" + line2;
-			return line3;
-			
-		
-		
+			tmp.setToPay(amountToPlay);
+			tmp.setAllGames(line2);
+			finalCustomerList.add(tmp);
+			System.out.println(tmp.getId());
+			System.out.println("Se ejecuto el hilo 1");
 	}
+	
 	public int getCurrentShelves() {
 		return shelvesCounted;
 	}
@@ -273,5 +308,59 @@ public class Store {
 	public ArrayList<Game> getAllGames(){
 		return allGames;
 	}
-	
+	/*
+	public ArrayList<Client> getClientsList(){
+		
+		ArrayList<Client> tmpClients = new ArrayList<>();
+		
+		Queue<Client> clients = clientsQueue;
+		
+		
+		while(clients.isEmpty()==false) {
+		
+			System.out.println("Entra al while");
+			Client toRemove = clients.remove();
+			System.out.println("Se añade el cliente: " + toRemove.getId() + " Con juegos: " + toRemove.getAllGames());
+			tmpClients.add(toRemove);
+			
+		}
+		 System.out.println("Size "+tmpClients.size());
+		return tmpClients;
+	}
+	 */
+	public Queue<Client> getClientsQueue() {
+		return clientsQueue;
+	}
+
+	public void setClientsQueue(Queue<Client> clientsQueue) {
+		this.clientsQueue = clientsQueue;
+	}
+	public ArrayList<Client> getFinalClient(){
+		return finalCustomerList;
+	}
+	public void starThreads() {
+		
+		/*
+		GameStoreThread tmp = cashier.getObject();
+		tmp.run();
+		
+		
+		while(cashier.getNext()!=null) {
+			
+			tmp = cashier.getNext().getObject();
+			tmp.run();
+			
+			
+		}
+		*/
+		
+		Queue<GameStoreThread> copy = cashier;
+		while(copy.isEmpty()==false) {
+			
+			GameStoreThread tmp = copy.remove();
+			tmp.run();
+		}
+		
+		
+	}
 }
