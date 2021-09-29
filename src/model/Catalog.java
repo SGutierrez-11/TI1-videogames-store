@@ -2,7 +2,7 @@ package model;
 
 import collections.Stack;
 
-public class Catalog implements Cloneable{
+public class Catalog{
 
 	private Stack<Game> games;
 	
@@ -18,10 +18,8 @@ public class Catalog implements Cloneable{
 	public void setGames(Stack<Game> games) {
 		this.games = games;
 	}
-	@Override
-	public Catalog clone() throws CloneNotSupportedException {
-		
-		return (Catalog) super.clone();
+	public Catalog(Catalog that) {
+		this(that.getGames());
 		
 	}
 	
