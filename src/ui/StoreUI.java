@@ -272,18 +272,35 @@ public class StoreUI {
 	 }
 	 @FXML
 	 public void forthStep(ActionEvent event) throws IOException {
-
-		 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("clientExit.fxml"));
+		 	
+		 	
+		 gameStore.starThreads();
+		 gameStore.setGamesEmpty(); 
+			changeScreenForForthStep();
+			
+			//GameStoreThread2 refreshThread = new GameStoreThread2(this);
+			//refreshThread.run();
+			
+	}
+	 public void changeScreenForForthStep() throws IOException {
+		 
+		 
+		 if(gameStore.getClientsQueue().isEmpty()==false) {
+		 		
+		 		changeScreenForForthStep();
+		 		
+		 	}else {
+		 
+		 	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("clientExit.fxml"));
 			fxmlLoader.setController(this);
 	    	Parent menuPane = fxmlLoader.load();
-	    	mainPane.getChildren().setAll(menuPane);
-			gameStore.setGamesEmpty(); 
-			gameStore.starThreads();
+	    	mainPane.getChildren().setAll(menuPane); 
+	    	
+	    	//gameStore.starThreads();
 			initializeCustomerPayTableview();
 			gamePayOrderTableView.refresh();
-			GameStoreThread2 refreshThread = new GameStoreThread2(this);
-			refreshThread.run();
-			
+		 	}
+		 
 	 }
 	 public void initializeCustomerPayTableview() {
 		 

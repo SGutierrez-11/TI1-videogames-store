@@ -81,9 +81,11 @@ public class HashTable<T> implements InterfaceHashTable<T> {
 		int tmp = hash(key);
 		
 		int i = tmp;
-		
-		do {
 			
+		do {
+			while(i<0) {
+				i = (i+1)% maxSize;
+			}	
 			if(keys[i]==null) {
 				
 				keys[i] = key;

@@ -249,9 +249,7 @@ public class Store {
 		
 			Stack<Game> stackToPay = new Stack<Game>();
 			
-			Queue<Client> copy = clientsQueue;
-			
-			Client tmp = copy.remove();
+			Client tmp = clientsQueue.remove();
 			
 			String line2 = "";
 			
@@ -259,19 +257,23 @@ public class Store {
 			
 			for(int i=0; i < tmp.getGames().getGames().size();i++) {
 			
+			System.out.println("Entra al for del hilo");	
+				
 			Game tmpGame = tmp.getGames().getGames().pop();
 			
 			Thread.sleep(3000);
 			
 			amountToPlay += tmpGame.getPrice();
 			 
+			
+			
 			 stackToPay.push(tmpGame);
 			 line2 += tmpGame.getCode() + " ";
 			}
 			tmp.setToPay(amountToPlay);
 			tmp.setAllGames(line2);
 			finalCustomerList.add(tmp);
-			
+			System.out.println(tmp.getId());
 			System.out.println("Se ejecuto el hilo 1");
 	}
 	
