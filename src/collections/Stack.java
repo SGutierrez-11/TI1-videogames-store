@@ -12,10 +12,12 @@ public class Stack<T> implements Stackable<T>{
 	public Stack(T element) {
 		this.element = element;
 	}
+	
 	public Stack(Stack<T> previus, T element) {
 		this.previus = previus;
 		this.element = element;
 	}
+	
 	public boolean empty() {
 		
 		if(previus == null) {

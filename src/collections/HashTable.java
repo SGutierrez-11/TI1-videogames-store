@@ -72,6 +72,8 @@ public class HashTable<T> implements InterfaceHashTable<T> {
 	
 		int tmp = hash(key);
 		
+		System.out.println(tmp);
+		
 		int i = tmp;
 		
 		do {
