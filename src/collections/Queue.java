@@ -48,7 +48,7 @@ public class Queue<T> implements InterfaceQueue<T>{
 
 	@Override
 	public T peek() {
-		return (T) value;
+		return value.getObject();
 	}
 
 

@@ -18,7 +18,7 @@ import javafx.scene.layout.BorderPane;
 import model.Client;
 import model.Game;
 import model.Store;
-import thread.GameStoreThread2;
+//import thread.GameStoreThread2;
 
 public class StoreUI {
 

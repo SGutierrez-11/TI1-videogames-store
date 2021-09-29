@@ -189,17 +189,17 @@ public class Store {
 	*/
 	
 	public void addClienteToQueue(String code) {
-		System.out.println("Entra al add");
+		//System.out.println("Entra al add");
 		Client clientToAdd = new Client(code);
 		//*********************
 		Stack<Game> ordered = new Stack<>();
 		for (int i = 0; i < shelves.length; i++) {
-			System.out.println("Entra al primer for");
+			//System.out.println("Entra al primer for");
 			ArrayList<Game> gamesInShelf = new ArrayList<>();
 			for (int j = 0; j < games.size(); j++) {
-				System.out.println("Entra al segundo for");
+				//System.out.println("Entra al segundo for");
 				if (shelves[i].contains(games.get(j).getCode())) {
-					System.out.println("Paso del if");
+					//System.out.println("Paso del if");
 					gamesInShelf.add(games.get(j));
 				}
 			}
@@ -215,11 +215,11 @@ public class Store {
 			}
 			for (int j = 0; j < gamesInShelf.size(); j++) {
 				ordered.push(gamesInShelf.get(j));
-				System.out.println("Hash: "+shelves[i].hash(gamesInShelf.get(j).getCode()));
+				//System.out.println("Hash: "+shelves[i].hash(gamesInShelf.get(j).getCode()));
 			}
 		}
 		Catalog tmp = new Catalog(ordered);
-		System.out.println("Catalog size: " + tmp.getGames().size());
+		//System.out.println("Catalog size: " + tmp.getGames().size());
 		clientToAdd.setGames(tmp);
 		clientsQueue.add(clientToAdd);
 		//System.out.println("Me quiero matar: " + clientsQueue.peek().getGames().getGames().size());
@@ -261,27 +261,22 @@ public class Store {
 			
 			int amountToPlay = 0;
 			
-			System.out.println(" Tamanio: " + tmp.getGames().getGames().size() );
+			//System.out.println(" Tamanio: " + tmp.getGames().getGames().size() );
 			for(int i=0; i < tmp.getGames().getGames().size();i++) {
-			
-			System.out.println("Entra al for del hilo");	
 				
 			Game tmpGame = tmp.getGames().getGames().pop();
 			
-			Thread.sleep(3000);
-			
 			amountToPlay += tmpGame.getPrice();
 			 
-			
+			Thread.sleep(2000);
 			
 			 stackToPay.push(tmpGame);
 			 line2 += tmpGame.getCode() + " ";
+			 System.out.println(line2);
 			}
 			tmp.setToPay(amountToPlay);
 			tmp.setAllGames(line2);
 			finalCustomerList.add(tmp);
-			System.out.println(tmp.getId());
-			System.out.println("Se ejecuto el hilo 1");
 	}
 	
 	public int getCurrentShelves() {
@@ -360,10 +355,13 @@ public class Store {
 			
 		}
 		*/
-		
+		int counter = 0;
 		while(cashier.isEmpty()==false) {
 			
 			GameStoreThread tmp = cashier.remove();
+			counter+=1;
+			System.out.println(counter);
+			
 			tmp.run();
 		}
 		

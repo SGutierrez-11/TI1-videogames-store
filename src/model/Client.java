@@ -45,23 +45,37 @@ public class Client {
 		
 		String games = "";
 		
-		Stack<Game> clone = new Stack<Game>(); 
+		Stack<Game> tmpStack = new Stack<Game>();
+		Stack<Game> tmpStack2 = new Stack<Game>();
 		
+
 		Catalog tmpCatalog = new Catalog(getGames().getGames());
+
 		
-		while(tmpCatalog.getGames().empty()==false) {
+		//Catalog tmpCatalog = getGames();
 		
-			System.out.println(games + "Paso por aqui");
-			Game tmpGame = tmpCatalog.getGames().pop();
+		while(getGames().getGames().empty()==false) {
+		
+			//System.out.println(games + "Paso por aqui");
+			Game tmpGame =getGames().getGames().pop();
+			tmpStack.push(tmpGame);
 			
 			if(tmpGame.getCode()=="") {
 				
 			}else {
 			games+= tmpGame.getCode() + ", "; 
+			System.out.println("Games: " + games);
 			}
 			
 		}
+		while(tmpStack.isEmpty()==false) {
+			
+			Game tmpGame2 = tmpStack.pop();
+			tmpStack2.push(tmpGame2);
+			
+		}
 		allGames = games;
+		getGames().setGames(tmpStack2);
 		return allGames;
 	}
 

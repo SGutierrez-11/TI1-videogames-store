@@ -16,7 +16,7 @@ public class GameStoreThread extends Thread{
 		try {
 			while(gameStore.getClientsQueue().isEmpty()==false) {
 				
-				System.out.println("Entral al hilo 1");
+				//System.out.println("Entral al hilo 1");
 				gameStore.payClient();
 				
 				Thread.sleep(2000);

@@ -59,7 +59,7 @@ public class HashTable<T> implements InterfaceHashTable<T> {
 	@Override
 	public boolean contains(String key) {
 		
-		System.out.println("Llega al contains");
+		//System.out.println("Llega al contains");
 		if(get(key)==null) {
 			return true;
 		
@@ -80,7 +80,7 @@ public class HashTable<T> implements InterfaceHashTable<T> {
 	
 		int tmp = hash(key);
 		
-		System.out.println(tmp);
+		//System.out.println(tmp);
 		
 		int i = tmp;
 			
@@ -107,7 +107,7 @@ public class HashTable<T> implements InterfaceHashTable<T> {
 	public T get(String key) {
 		
 		int i = 0;
-		System.out.println("Entra al get");
+		//System.out.println("Entra al get");
 		boolean out = false;
 		
 		for(int j=0; j < keys.length && out==false;j++) {
