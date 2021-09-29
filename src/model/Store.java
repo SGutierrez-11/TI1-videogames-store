@@ -175,13 +175,6 @@ public class Store {
 	
 	
 	public void addClienteToQueue(String code) {
-		//Primero crear metodo que convierta de arraylist a stack y este en catalogo catologo
-		//luego ordernar catologo
-		//tercero guardar catologo en el stack games
-		//cuarto convertir el stack games en catologo y setearlo al cliente
-		//quinto añadir cliente al queue
-		
-		
 		System.out.println("Entra al add");
 		Client clientToAdd = new Client(code);
 		//*********************
@@ -211,16 +204,10 @@ public class Store {
 				System.out.println("Hash: "+shelves[i].hash(gamesInShelf.get(j).getCode()));
 			}
 		}
-		
-		
-		//*************************
 		Catalog tmp = new Catalog(ordered);
-		clientToAdd.setGames(turnGamesArrayListInCatalog());
-		
-		//clientToAdd.setGames(tmp);
+		clientToAdd.setGames(tmp);
 		clientsQueue.add(clientToAdd);
 		setGamesEmpty();
-		
 	}
 	public void createCashiers(int amountToCreate, int amountCreated,LinkedList<GameStoreThread> c) {
 		
