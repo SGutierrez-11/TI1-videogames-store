@@ -3,6 +3,7 @@ package collections;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -83,4 +84,18 @@ public class QueueTest {
 		setupStage2();
 		assertEquals(queue.peek(), client);
 	}
+	
+	@Test
+	public void testIsEmpty_1() {
+		setupStage1();
+		Queue<Client> q = new Queue<>();
+		assertTrue(q.isEmpty());
+	}
+	
+	@Test
+	public void testIsEmpty_2() {
+		setupStage2();
+		assertFalse(queue.isEmpty());
+	}
+	
 }
