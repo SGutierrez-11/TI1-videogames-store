@@ -72,8 +72,8 @@ public class Store {
 		
 		clientsQueue = new Queue<Client>();
 		
-		GameStoreThread firstThread = new GameStoreThread(this);
-		cashier = new Queue();
+		//GameStoreThread firstThread = new GameStoreThread(this);
+		cashier = new Queue<GameStoreThread>();
 		createCashiers(cashierAmount);
 		
 		this.clientsAmount =  clientsAmount;
@@ -170,6 +170,8 @@ public class Store {
 		
 	}
 	*/
+	
+	/*
 	public Catalog turnGamesArrayListInCatalog() {
 		
 		Stack<Game> tmpStack = new Stack<Game>();
@@ -184,7 +186,7 @@ public class Store {
 		Catalog clientCatolog = new Catalog(tmpStack);
 		return clientCatolog;
 	}
-	
+	*/
 	
 	public void addClienteToQueue(String code) {
 		System.out.println("Entra al add");
@@ -220,6 +222,7 @@ public class Store {
 		System.out.println("Catalog size: " + tmp.getGames().size());
 		clientToAdd.setGames(tmp);
 		clientsQueue.add(clientToAdd);
+		System.out.println("Me quiero matar: " + clientsQueue.peek().getGames().getGames().size());
 		toShowClients.add(clientToAdd);
 		setGamesEmpty();
 	}
@@ -251,6 +254,8 @@ public class Store {
 			Stack<Game> stackToPay = new Stack<Game>();
 			
 			Client tmp = clientsQueue.remove();
+			//System.out.println(clientsQueue.peek().getGames().getGames().size());
+			
 			
 			String line2 = "";
 			
@@ -356,10 +361,9 @@ public class Store {
 		}
 		*/
 		
-		Queue<GameStoreThread> copy = cashier;
-		while(copy.isEmpty()==false) {
+		while(cashier.isEmpty()==false) {
 			
-			GameStoreThread tmp = copy.remove();
+			GameStoreThread tmp = cashier.remove();
 			tmp.run();
 		}
 		
