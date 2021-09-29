@@ -217,6 +217,7 @@ public class Store {
 			}
 		}
 		Catalog tmp = new Catalog(ordered);
+		System.out.println("Catalog size: " + tmp.getGames().size());
 		clientToAdd.setGames(tmp);
 		clientsQueue.add(clientToAdd);
 		toShowClients.add(clientToAdd);
@@ -255,6 +256,7 @@ public class Store {
 			
 			int amountToPlay = 0;
 			
+			System.out.println(" Tamanio: " + tmp.getGames().getGames().size() );
 			for(int i=0; i < tmp.getGames().getGames().size();i++) {
 			
 			System.out.println("Entra al for del hilo");	

@@ -1,6 +1,5 @@
 package model;
 
-import collections.LinkedList;
 import collections.Stack;
 
 public class Catalog {
