@@ -255,13 +255,14 @@ public class StoreUI {
 	 public void initializeGameOrderTableview() {
 		 
 		 ObservableList<Client> observableList;
-		 observableList = FXCollections.observableArrayList(gameStore.getClientsList());
+		 observableList = FXCollections.observableArrayList(gameStore.getToShowClients());
 		 gameOrderTableView.setItems(observableList);
-		 for(int i=0; i < gameStore.getClientsList().size();i++) {
+		 //System.out.println("El tamanio es: " + gameStore.getClientsList().size()how);
+		 //for(int i=0; i < gameStore.getClientsList().size();i++) {
 			 
-			 System.out.println(gameStore.getClientsList().get(i).getAllGames()+gameStore.getClientsList().get(i).getId());
+			// System.out.println("Esto debe mostrar"+gameStore.getClientsList().get(i).getAllGames()+gameStore.getClientsList().get(i).getId());
 			 
-		 }
+		 //}
 	    	
 	     gameOrderClientColumn.setCellValueFactory(new PropertyValueFactory<Client,String>("id"));
 	     gameOrderGameColumn.setCellValueFactory(new PropertyValueFactory<Client,String>("allGames"));

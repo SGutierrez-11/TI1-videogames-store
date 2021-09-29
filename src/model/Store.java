@@ -40,14 +40,24 @@ public class Store {
 	
 	private ArrayList<Game> allGames;
 	
-	private LinkedList<GameStoreThread> cashier;
+	private Queue<GameStoreThread> cashier;
 	
 	private ArrayList<Client> finalCustomerList;
+	
+	private ArrayList<Client> toShowClients;
 	
 	int shelvesCounted;
 	
 	int clientsCounted;
 	
+	public ArrayList<Client> getToShowClients() {
+		return toShowClients;
+	}
+
+	public void setToShowClients(ArrayList<Client> toShowClients) {
+		this.toShowClients = toShowClients;
+	}
+
 	public Store() {
 		
 	}
@@ -63,8 +73,8 @@ public class Store {
 		clientsQueue = new Queue<Client>();
 		
 		GameStoreThread firstThread = new GameStoreThread(this);
-		cashier = new LinkedList<GameStoreThread>(firstThread);
-		createCashiers(shelvesToCreate,1, cashier);
+		cashier = new Queue();
+		createCashiers(cashierAmount);
 		
 		this.clientsAmount =  clientsAmount;
 		
@@ -76,6 +86,8 @@ public class Store {
 		allGames = new ArrayList<Game>();
 		
 		finalCustomerList = new ArrayList<Client>();
+		
+		toShowClients = new ArrayList<Client>();
 		
 		//gamesLinked = new ArrayList[shelvesToCreate];
 	}
@@ -160,7 +172,7 @@ public class Store {
 	*/
 	public Catalog turnGamesArrayListInCatalog() {
 		
-		Stack<Game> tmpStack = new Stack();
+		Stack<Game> tmpStack = new Stack<Game>();
 		
 		ArrayList<Game> tmp = getGames(); 
 		
@@ -207,10 +219,11 @@ public class Store {
 		Catalog tmp = new Catalog(ordered);
 		clientToAdd.setGames(tmp);
 		clientsQueue.add(clientToAdd);
+		toShowClients.add(clientToAdd);
 		setGamesEmpty();
 	}
-	public void createCashiers(int amountToCreate, int amountCreated,LinkedList<GameStoreThread> c) {
-		
+	public void createCashiers(int amountCreated) {
+		/*
 		if(amountToCreate > amountCreated) {
 		
 			GameStoreThread tmpThread = new GameStoreThread(this);
@@ -223,6 +236,14 @@ public class Store {
 			return;
 			
 		}
+		*/
+		for(int i=0; i < amountCreated;i++) {
+			
+			GameStoreThread tmp = new GameStoreThread(this);
+			cashier.add(tmp);
+			
+		}
+		
 	}
 	public void payClient() throws InterruptedException {	
 		
@@ -231,8 +252,6 @@ public class Store {
 			Queue<Client> copy = clientsQueue;
 			
 			Client tmp = copy.remove();
-			
-			String line = "";
 			
 			String line2 = "";
 			
@@ -244,7 +263,7 @@ public class Store {
 			
 			Thread.sleep(1000);
 			
-			 amountToPlay += tmpGame.getPrice();
+			amountToPlay += tmpGame.getPrice();
 			 
 			 stackToPay.push(tmpGame);
 			 line2 += tmpGame.getCode() + " ";
@@ -285,6 +304,7 @@ public class Store {
 	public ArrayList<Game> getAllGames(){
 		return allGames;
 	}
+	/*
 	public ArrayList<Client> getClientsList(){
 		
 		ArrayList<Client> tmpClients = new ArrayList<>();
@@ -300,9 +320,10 @@ public class Store {
 			tmpClients.add(toRemove);
 			
 		}
+		 System.out.println("Size "+tmpClients.size());
 		return tmpClients;
 	}
-
+	 */
 	public Queue<Client> getClientsQueue() {
 		return clientsQueue;
 	}
@@ -315,6 +336,7 @@ public class Store {
 	}
 	public void starThreads() {
 		
+		/*
 		GameStoreThread tmp = cashier.getObject();
 		tmp.run();
 		
@@ -325,6 +347,16 @@ public class Store {
 			tmp.run();
 			
 			
-		}	
+		}
+		*/
+		
+		Queue<GameStoreThread> copy = cashier;
+		while(copy.isEmpty()==false) {
+			
+			GameStoreThread tmp = copy.remove();
+			tmp.run();
+		}
+		
+		
 	}
 }
