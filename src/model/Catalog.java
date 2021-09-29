@@ -1,9 +1,8 @@
 package model;
 
-import collections.LinkedList;
 import collections.Stack;
 
-public class Catalog {
+public class Catalog implements Cloneable{
 
 	private Stack<Game> games;
 	
@@ -18,6 +17,12 @@ public class Catalog {
 
 	public void setGames(Stack<Game> games) {
 		this.games = games;
+	}
+	@Override
+	public Catalog clone() throws CloneNotSupportedException {
+		
+		return (Catalog) super.clone();
+		
 	}
 	
 }

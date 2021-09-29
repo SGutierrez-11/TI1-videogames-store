@@ -1,5 +1,7 @@
 package model;
 
+import collections.Stack;
+
 public class Client {
 
 	private String id;
@@ -39,11 +41,13 @@ public class Client {
 	public void setToPay(int toPay) {
 		this.toPay = toPay;
 	}
-	public String getAllGames() {
+	public String getAllGames() throws CloneNotSupportedException {
 		
 		String games = "";
 		
-		Catalog tmpCatalog = getGames();
+		Stack<Game> clone = new Stack<Game>(); 
+		
+		Catalog tmpCatalog = getGames().clone();
 		
 		while(tmpCatalog.getGames().empty()==false) {
 		
