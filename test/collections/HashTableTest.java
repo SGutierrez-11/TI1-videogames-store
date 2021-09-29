@@ -77,7 +77,6 @@ public class HashTableTest {
 	public void testContains_1() {
 		setupStage1();
 		HashTable<Game> ht = new HashTable<>(1);
-		Game gm = new Game("111", 200, 3);
 		assertTrue(ht.contains("123"));	
 	}
 	
@@ -86,4 +85,53 @@ public class HashTableTest {
 		setupStage2();
 		assertFalse(hash.contains("123"));	
 	}
+	
+	@Test
+	public void testHash_1() {
+		setupStage1();
+		HashTable<Game> ht = new HashTable<>(1);
+		assertEquals(ht.hash("123"),0);
+	}
+	
+	@Test
+	public void testHash_2() {
+		setupStage2();		
+		assertEquals(hash.hash("123"),0);
+	}
+	
+	@Test
+	public void testInsert_1() {
+		setupStage1();
+		HashTable<Game> ht = new HashTable<>(1);
+		assertEquals(ht.getSize(),0);
+		assertTrue(ht.isEmpty());
+	}
+	
+	@Test
+	public void testInsert_2() {
+		setupStage2();
+		assertEquals(hash.getSize(),1);
+		assertFalse(hash.isEmpty());
+	}
+	
+	@Test
+	public void testInsert_3() {
+		setupStage2();
+		Game gm = new Game("231", 400, 3);
+		hash.insert(gm.getCode(), gm);
+		
+		assertEquals(hash.getSize(),1);
+		assertEquals(hash.get("231"),null);
+		assertFalse(hash.isEmpty());
+	}
+	
+	@Test
+	public void testGet_1() {
+		setupStage1();
+		HashTable<Game> ht = new HashTable<>(1);
+		assertEquals(ht.get("123"), null);
+	}
+	
+	
+	
 }
