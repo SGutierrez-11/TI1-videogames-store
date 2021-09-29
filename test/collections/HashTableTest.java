@@ -132,6 +132,10 @@ public class HashTableTest {
 		assertEquals(ht.get("123"), null);
 	}
 	
-	
+	@Test
+	public void testGet_2() {
+		setupStage2();
+		assertEquals(hash.get("123"), game);
+	}
 	
 }
