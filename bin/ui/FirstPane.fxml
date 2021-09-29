@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane fx:id="mainPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <GridPane style="-fx-background-color: Gray;" BorderPane.alignment="CENTER">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Shelves Amount:" textFill="#b220c9" translateX="50.0" GridPane.columnIndex="1">
+               <font>
+                  <Font name="Times New Roman" size="17.0" />
+               </font>
+            </Label>
+            <TextField fx:id="shelvesAmount" translateX="-10.0" GridPane.columnIndex="2" />
+            <TextField fx:id="clientsQuantity" minWidth="-Infinity" prefHeight="26.0" prefWidth="202.0" translateX="-10.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <TextField fx:id="cashiersQuantity" translateX="-10.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Label layoutX="10.0" layoutY="63.0" text="Clients Quantity:" textFill="#ae20c7" translateX="50.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Times New Roman" size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="188.0" text="Cashiers Quantity:" textFill="#ae20c7" translateX="50.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <font>
+                  <Font name="Times New Roman" size="17.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="100.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true" translateX="80.0">
+               <image>
+                  <Image url="@Shelf.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="100.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true" translateX="80.0" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@Client.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="100.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true" translateX="80.0" GridPane.rowIndex="2">
+               <image>
+                  <Image url="@Cajero.png" />
+               </image>
+            </ImageView>
+         </children>
+      </GridPane>
+   </center>
+   <bottom>
+      <GridPane style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button mnemonicParsing="false" text="Reset" translateX="230.0" />
+            <Button mnemonicParsing="false" onAction="#loadAddGame" text="Next" translateX="30.0" GridPane.columnIndex="1" />
+         </children>
+      </GridPane>
+   </bottom>
+</BorderPane>

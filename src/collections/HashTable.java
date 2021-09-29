@@ -80,10 +80,14 @@ public class HashTable<T> implements InterfaceHashTable<T> {
 	
 		int tmp = hash(key);
 		
-		int i = tmp;
+		System.out.println(tmp);
 		
-		do {
+		int i = tmp;
 			
+		do {
+			while(i<0) {
+				i = (i+1)% maxSize;
+			}	
 			if(keys[i]==null) {
 				
 				keys[i] = key;
